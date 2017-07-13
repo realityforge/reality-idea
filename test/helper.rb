@@ -21,6 +21,7 @@ require 'reality/idea'
 
 class Reality::Idea::TestCase < Minitest::Test
   include Test::Unit::Assertions
+  include Reality::Logging::Assertions
 
   def setup
     self.setup_working_dir
@@ -60,5 +61,11 @@ class Reality::Idea::TestCase < Minitest::Test
 
   def workspace_dir
     @workspace_dir ||= File.expand_path(ENV['TEST_TMP_DIR'] || "#{File.dirname(__FILE__)}/../tmp/workspace")
+  end
+
+  def assert_idea_error(expected_message, &block)
+    assert_logging_error(Reality::Idea, expected_message) do
+      yield block
+    end
   end
 end
