@@ -17,3 +17,4 @@ require 'reality/model'
 
 require 'reality/idea/model'
 require 'reality/idea/idea_file'
+require 'reality/idea/project'
