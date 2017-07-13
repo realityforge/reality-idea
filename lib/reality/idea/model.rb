@@ -15,6 +15,7 @@
 module Reality
   module Idea
     module Model
+      Reality::Logging.configure(Model, ::Logger::WARN)
 
     end
   end
