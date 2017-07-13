@@ -16,3 +16,4 @@ require 'reality/logging'
 require 'reality/model'
 
 require 'reality/idea/model'
+require 'reality/idea/idea_file'
