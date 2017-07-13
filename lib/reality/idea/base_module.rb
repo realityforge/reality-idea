@@ -24,6 +24,10 @@ module Reality
           @module_directory || "#{self.project.project_directory}/#{self.name}"
         end
 
+        def extension
+          'iml'
+        end
+
         protected
 
         def _base_directory

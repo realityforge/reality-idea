@@ -25,10 +25,6 @@ class Reality::Idea::TestBaseModule < Reality::Idea::TestCase
 
     attr_reader :name
 
-    def extension
-      'xml'
-    end
-
     def project
       @project
     end
@@ -43,12 +39,12 @@ class Reality::Idea::TestBaseModule < Reality::Idea::TestCase
     element = TestElement.new('core', project)
 
     assert_equal 'core', element.idea_element_name
-    assert_equal 'core.xml', element.local_filename
-    assert_equal "#{local_dir}/core/core.xml", element.filename
+    assert_equal 'core.iml', element.local_filename
+    assert_equal "#{local_dir}/core/core.iml", element.filename
     assert_equal "#{local_dir}/core", element.module_directory
 
     element.module_directory = local_dir2
     assert_equal local_dir2, element.module_directory
-    assert_equal "#{local_dir2}/core.xml", element.filename
+    assert_equal "#{local_dir2}/core.iml", element.filename
   end
 end
