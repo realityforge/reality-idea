@@ -12,10 +12,31 @@
 # limitations under the License.
 #
 
-require 'reality/logging'
-require 'reality/model'
+module Reality
+  module Idea
+    module Model
+      module BaseModule
+        include IdeaFile
 
-require 'reality/idea/model'
-require 'reality/idea/idea_file'
-require 'reality/idea/project'
-require 'reality/idea/base_module'
+        attr_writer :module_directory
+
+        def module_directory
+          @module_directory || "#{self.project.project_directory}/#{self.name}"
+        end
+
+        protected
+
+        def _base_directory
+          self.module_directory
+        end
+
+        private
+
+        def base_module_pre_init
+          @module_directory = nil
+          idea_file_pre_init
+        end
+      end
+    end
+  end
+end
