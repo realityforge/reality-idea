@@ -21,6 +21,9 @@ Gem::Specification.new do |s|
   s.has_rdoc           = false
   s.rdoc_options       = %w(--line-numbers --inline-source --title reality-idea)
 
+  s.add_dependency 'reality-core', '>= 1.8.0'
+  s.add_dependency 'reality-model', '>= 1.3.0'
+
   s.add_development_dependency(%q<minitest>, ['= 5.9.1'])
   s.add_development_dependency(%q<test-unit>, ['= 3.1.5'])
 end

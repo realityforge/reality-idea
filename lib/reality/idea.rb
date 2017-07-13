@@ -12,4 +12,7 @@
 # limitations under the License.
 #
 
+require 'reality/logging'
+require 'reality/model'
+
 require 'reality/idea/model'
