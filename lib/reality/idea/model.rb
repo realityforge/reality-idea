@@ -14,10 +14,13 @@
 
 module Reality
   module Idea
-    module Model
-      Reality::Logging.configure(Model, ::Logger::WARN)
+    Reality::Logging.configure(Idea, ::Logger::WARN)
 
-      Reality::Model::Repository.new(:Model, Model) do |r|
+    module Model
+      Reality::Model::Repository.new(:Model,
+                                     Model,
+                                     :log_container => Idea,
+                                     :instance_container => Idea) do |r|
         r.model_element(:project)
         r.model_element(:ruby_module, :project)
       end
