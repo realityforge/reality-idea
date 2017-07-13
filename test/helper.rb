@@ -19,15 +19,25 @@ require 'minitest/autorun'
 require 'test/unit/assertions'
 require 'reality/idea'
 
+module Reality::Idea
+  class << self
+    def reset
+      self.send(:project_map).clear
+    end
+  end
+end
+
 class Reality::Idea::TestCase < Minitest::Test
   include Test::Unit::Assertions
   include Reality::Logging::Assertions
 
   def setup
+    Reality::Idea.reset
     self.setup_working_dir
   end
 
   def teardown
+    Reality::Idea.reset
     self.teardown_working_dir
   end
 
