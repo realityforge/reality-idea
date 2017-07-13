@@ -17,7 +17,10 @@ module Reality
     module Model
       Reality::Logging.configure(Model, ::Logger::WARN)
 
+      Reality::Model::Repository.new(:Model, Model) do |r|
+        r.model_element(:project)
+        r.model_element(:ruby_module, :project)
+      end
     end
   end
 end
-
