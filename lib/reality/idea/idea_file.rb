@@ -40,13 +40,13 @@ module Reality
         end
 
         def extension
-          Reality::Idea.error("IdeaFile #{self.name} has not overridden extension method")
+          Reality::Idea.error("IdeaFile #{self.name} has not overridden 'extension' method")
         end
 
         protected
 
         def _base_directory
-          Reality::Idea.error("IdeaFile #{self.name} has not overridden _base_directory method")
+          Reality::Idea.error("IdeaFile #{self.name} has not overridden '_base_directory' method")
         end
 
         private
