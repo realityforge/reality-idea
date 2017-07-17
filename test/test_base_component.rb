@@ -14,7 +14,7 @@
 
 require File.expand_path('../helper', __FILE__)
 
-class Reality::Idea::TestBaseModule < Reality::Idea::TestCase
+class Reality::Idea::TestBaseComponent < Reality::Idea::TestCase
   class TestElement
     include Reality::Idea::Model::BaseComponent
 
