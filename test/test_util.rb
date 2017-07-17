@@ -12,13 +12,13 @@
 # limitations under the License.
 #
 
-require 'rexml/document'
+require File.expand_path('../helper', __FILE__)
 
-require 'reality/logging'
-require 'reality/model'
+class Reality::Idea::TestUtil < Reality::Idea::TestCase
 
-require 'reality/idea/model'
-require 'reality/idea/idea_file'
-require 'reality/idea/project'
-require 'reality/idea/base_module'
-require 'reality/idea/ruby/ruby_module'
+  def test_idea_element_name
+    doc = Reality::Idea::Util.new_document('<my-xml></my-xml>')
+
+    assert_equal 'my-xml', doc.root.name
+  end
+end

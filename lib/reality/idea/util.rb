@@ -12,13 +12,14 @@
 # limitations under the License.
 #
 
-require 'rexml/document'
-
-require 'reality/logging'
-require 'reality/model'
-
-require 'reality/idea/model'
-require 'reality/idea/idea_file'
-require 'reality/idea/project'
-require 'reality/idea/base_module'
-require 'reality/idea/ruby/ruby_module'
+module Reality
+  module Idea
+    module Util
+      class << self
+        def new_document(value)
+          REXML::Document.new(value, :attribute_quote => :quote)
+        end
+      end
+    end
+  end
+end
