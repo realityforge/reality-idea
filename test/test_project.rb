@@ -40,4 +40,11 @@ class Reality::Idea::TestProject < Reality::Idea::TestCase
     assert_equal 'acal-acal-tr.ipr', project.local_filename
     assert_equal "#{local_dir}/acal-acal-tr.ipr", project.filename
   end
+
+  def test_resolve_path
+    local_dir = self.random_local_dir
+    project = Reality::Idea::Model::Project.new('acal', :project_directory => local_dir)
+
+    assert_equal '$PROJECT_DIR$/core/foo.txt', project.resolve_path("#{local_dir}/core/foo.txt")
+  end
 end

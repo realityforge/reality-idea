@@ -33,6 +33,10 @@ module Reality
           {}
         end
 
+        def resolve_path(path)
+          resolve_path_from_base(path, 'PROJECT_DIR')
+        end
+
         protected
 
         def pre_init
