@@ -31,6 +31,10 @@ module Reality
 
         protected
 
+        def default_path_variables
+          {}
+        end
+
         def pre_init
           idea_file_pre_init
           @project_directory = nil

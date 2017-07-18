@@ -43,6 +43,13 @@ module Reality
           Reality::Idea.error("IdeaFile #{self.name} has not overridden 'extension' method")
         end
 
+        # The list of variables that are used in idea configuration when resolving paths
+        def path_variables
+          @path_variables || default_path_variables
+        end
+
+        attr_writer :path_variables
+
         protected
 
         def _base_directory
@@ -53,11 +60,16 @@ module Reality
           Reality::Idea::Util.relative_path(path, self._base_directory)
         end
 
+        def default_path_variables
+          Reality::Idea.error("IdeaFile #{self.name} has not overridden 'default_path_variables' method")
+        end
+
         private
 
         def idea_file_pre_init
           @prefix = nil
           @suffix = nil
+          @path_variables = nil
         end
       end
     end

@@ -35,6 +35,10 @@ module Reality
           self.module_directory
         end
 
+        def default_path_variables
+          self.project.default_path_variables
+        end
+
         private
 
         def base_module_pre_init
