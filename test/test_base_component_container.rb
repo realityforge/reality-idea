@@ -23,7 +23,16 @@ class Reality::Idea::TestBaseComponentContainer < Reality::Idea::TestCase
       'value1'
     end
 
+    def init_count
+      @init_count
+    end
+
     protected
+
+    def component_init
+      @init_count ||= 0
+      @init_count += 1
+    end
 
     include Reality::Idea::Model::BaseComponent
   end
@@ -35,7 +44,16 @@ class Reality::Idea::TestBaseComponentContainer < Reality::Idea::TestCase
       'value2'
     end
 
+    def init_count
+      @init_count
+    end
+
     protected
+
+    def component_init
+      @init_count ||= 0
+      @init_count += 1
+    end
 
     include Reality::Idea::Model::BaseComponent
   end
@@ -50,6 +68,7 @@ class Reality::Idea::TestBaseComponentContainer < Reality::Idea::TestCase
     assert_equal container.components.size, 1
     assert_not_nil component
     assert_equal component.my_attr, 'value1'
+    assert_equal component.init_count, 1
 
     component_b = container.send(:component_by_type, Component1)
 
@@ -57,12 +76,14 @@ class Reality::Idea::TestBaseComponentContainer < Reality::Idea::TestCase
     assert_not_nil component_b
     assert_equal component_b.my_attr, 'value1'
     assert_equal component_b, component
+    assert_equal component_b.init_count, 1
 
     component2 = container.send(:component_by_type, Component2)
 
     assert_equal container.components.size, 2
     assert_not_nil component2
     assert_equal component2.my_attr, 'value2'
+    assert_equal component2.init_count, 1
   end
 
   private
