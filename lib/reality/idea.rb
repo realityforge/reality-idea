@@ -14,6 +14,7 @@
 
 require 'rexml/document'
 require 'builder'
+require 'pathname'
 
 require 'reality/logging'
 require 'reality/model'

@@ -19,6 +19,16 @@ module Reality
         def new_document(value)
           REXML::Document.new(value, :attribute_quote => :quote)
         end
+
+        # Calculate the relative path between "path" and "directory" parameters.
+        # i.e
+        # relative_path( '/home/bob/foo', '/home/bob') => 'foo'
+        # relative_path( '/home/bob/../z/foo', '/home/bob') => '../z/foo'
+        # relative_path( '/home/bob/../bob/foo', '/home/bob') => 'foo'
+        #
+        def relative_path(path, directory)
+          Pathname.new(File.expand_path(path)).relative_path_from(Pathname.new(File.expand_path(directory))).to_s
+        end
       end
     end
   end

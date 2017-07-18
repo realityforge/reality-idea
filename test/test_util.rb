@@ -21,4 +21,12 @@ class Reality::Idea::TestUtil < Reality::Idea::TestCase
 
     assert_equal 'my-xml', doc.root.name
   end
+
+  def test_relative_path
+    dir = working_dir
+    assert_equal 'ace', Reality::Idea::Util.relative_path("#{dir}/ace", dir)
+    assert_equal 'a/path/to/file', Reality::Idea::Util.relative_path("#{dir}/a/path/to/file", dir)
+    assert_equal '../../foo', Reality::Idea::Util.relative_path("#{dir}/../../foo", dir)
+    assert_equal 'foo', Reality::Idea::Util.relative_path("#{dir}/../#{File.basename(dir)}/foo", dir)
+  end
 end
