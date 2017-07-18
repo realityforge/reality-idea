@@ -47,4 +47,13 @@ class Reality::Idea::TestBaseModule < Reality::Idea::TestCase
     assert_equal local_dir2, element.module_directory
     assert_equal "#{local_dir2}/core.iml", element.filename
   end
+
+  def test_resolve_path
+  local_dir = self.random_local_dir
+    project = Reality::Idea::Model::Project.new('acal', :project_directory => local_dir)
+    project.project_directory = local_dir
+    mod = TestElement.new('core', project)
+
+    assert_equal '$MODULE_DIR$/foo.txt',mod.resolve_path("#{local_dir}/core/foo.txt")
+  end
 end

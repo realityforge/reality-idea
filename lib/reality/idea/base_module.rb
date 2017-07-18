@@ -29,6 +29,10 @@ module Reality
           'iml'
         end
 
+        def resolve_path(path)
+          resolve_path_from_base(path, 'MODULE_DIR')
+        end
+
         protected
 
         def _base_directory
