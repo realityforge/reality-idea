@@ -64,6 +64,18 @@ module Reality
           Reality::Idea.error("IdeaFile #{self.name} has not overridden 'default_path_variables' method")
         end
 
+        def resolve_path_from_base(path, base_variable)
+          path_variables.each_pair do |key, path_prefix|
+            return path.sub(path_prefix, "$#{key}$") if path.to_s.index(path_prefix) == 0
+          end
+          begin
+            return "$#{base_variable}$/#{relative_path(path)}"
+          rescue ArgumentError
+            # ArgumentError happens on windows when self._base_directory and path are on different drives
+            return path
+          end
+        end
+
         private
 
         def idea_file_pre_init
