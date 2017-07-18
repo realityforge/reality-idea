@@ -62,4 +62,13 @@ class Reality::Idea::TestIdeaFile < Reality::Idea::TestCase
     assert_equal 'acal-model-tr.xml', element4.local_filename
     assert_equal "#{local_dir}/acal-model-tr.xml", element4.filename
   end
+
+  def test_relative_path
+    local_dir = self.random_local_dir
+    element1 = TestElement.new('core', local_dir)
+
+    assert_equal 'src/main/java/foo.java', element1.send(:relative_path, "#{local_dir}/src/main/java/foo.java")
+    assert_equal 'Buildfile', element1.send(:relative_path, "#{local_dir}/Buildfile")
+    assert_equal '../Buildfile', element1.send(:relative_path, File.expand_path("#{local_dir}/../Buildfile"))
+  end
 end

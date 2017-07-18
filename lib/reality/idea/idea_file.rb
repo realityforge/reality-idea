@@ -49,6 +49,10 @@ module Reality
           Reality::Idea.error("IdeaFile #{self.name} has not overridden '_base_directory' method")
         end
 
+        def relative_path(path)
+          Reality::Idea::Util.relative_path(path, self._base_directory)
+        end
+
         private
 
         def idea_file_pre_init
