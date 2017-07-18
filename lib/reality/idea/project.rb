@@ -17,6 +17,7 @@ module Reality
     module Model
       class Project
         include IdeaFile
+        include BaseComponentContainer
 
         attr_writer :project_directory
 

@@ -15,31 +15,15 @@
 module Reality
   module Idea
     module Model
-      module BaseModule
-        include IdeaFile
-        include BaseComponentContainer
-
-        attr_writer :module_directory
-
-        def module_directory
-          @module_directory || "#{self.project.project_directory}/#{self.name}"
-        end
-
-        def extension
-          'iml'
-        end
+      module BaseComponentContainer
 
         protected
 
-        def _base_directory
-          self.module_directory
-        end
-
-        private
-
-        def base_module_pre_init
-          @module_directory = nil
-          idea_file_pre_init
+        def component_by_type(module_type)
+          name = module_type.const_get(:NAME)
+          component = self.component_by_name?(name) ? self.component_by_name(name) : self.component(name)
+          component.class.send(:include, module_type) unless component.class.include?(module_type)
+          component
         end
       end
     end

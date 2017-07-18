@@ -20,8 +20,10 @@ require 'reality/model'
 
 require 'reality/idea/model'
 require 'reality/idea/idea_file'
-require 'reality/idea/project'
 require 'reality/idea/util'
 require 'reality/idea/base_component'
+require 'reality/idea/base_component_container'
 require 'reality/idea/base_module'
+
+require 'reality/idea/project'
 require 'reality/idea/ruby/ruby_module'
