@@ -29,11 +29,11 @@ module Reality
           'ipr'
         end
 
-        protected
-
         def default_path_variables
           {}
         end
+
+        protected
 
         def pre_init
           idea_file_pre_init
