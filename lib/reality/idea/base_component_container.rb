@@ -22,8 +22,8 @@ module Reality
         def component_by_type(module_type)
           name = module_type.const_get(:NAME)
           component = self.component_by_name?(name) ? self.component_by_name(name) : self.component(name)
-          unless component.class.include?(module_type)
-            component.class.send(:include, module_type)
+          unless component.singleton_class.include?(module_type)
+            component.singleton_class.send(:include, module_type)
             component.send(:component_init) if component.respond_to?(:component_init, true)
           end
           component
