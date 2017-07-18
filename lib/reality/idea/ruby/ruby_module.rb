@@ -26,6 +26,10 @@ module Reality
           @ruby_development_kit
         end
 
+        def settings
+          component_by_type(RModuleSettingsStorageComponent)
+        end
+
         protected
 
         def pre_init
