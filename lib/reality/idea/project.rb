@@ -37,6 +37,10 @@ module Reality
           resolve_path_from_base(path, 'PROJECT_DIR')
         end
 
+        def framework_detection_excludes
+          component_by_type(FrameworkDetectionExcludes)
+        end
+
         protected
 
         def pre_init
