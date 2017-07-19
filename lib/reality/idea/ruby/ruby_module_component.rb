@@ -15,25 +15,13 @@
 module Reality
   module Idea
     module Model
-      module RModuleSettingsStorageComponent
-        NAME = 'RModuleSettingsStorage'
-
-        attr_accessor :load_path
-
+      class RubyModuleComponent
         protected
 
-        def component_init
-          Reality::Idea.error("Component #{self.name} expected to have name '#{NAME}'") unless self.name == NAME
-          @load_path = []
-        end
+        include BaseComponent
 
-        def build_component(xml)
-          load_path_attr = { :number => self.load_path.size }
-          self.load_path.each_with_index do |path, i|
-            load_path_attr["string#{i}"] = self.component_container.resolve_path(path)
-          end
-          xml.LOAD_PATH(load_path_attr)
-          xml.I18N_FOLDERS(:number => 0)
+        def component_container
+          self.ruby_module
         end
       end
     end

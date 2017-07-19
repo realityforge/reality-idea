@@ -27,11 +27,9 @@ module Reality
           @paths = []
         end
 
-        include BaseComponent
-
         def build_component(xml)
           self.paths.each do |path|
-            xml.file(:url => self.project.resolve_path_to_url(path))
+            xml.file(:url => self.component_container.resolve_path_to_url(path))
           end
         end
       end

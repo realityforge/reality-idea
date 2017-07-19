@@ -25,6 +25,10 @@ module Reality
 
         protected
 
+        def component_container
+          Reality::Idea.error("Component #{self.name} has not overridden 'component_container' method")
+        end
+
         def build_component(xml)
           Reality::Idea.error("Component #{self.name} has not overridden 'build_component' method")
         end
