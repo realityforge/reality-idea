@@ -50,6 +50,14 @@ module Reality
 
         attr_writer :path_variables
 
+        def resolve_path(path)
+          Reality::Idea.error("IdeaFile #{self.name} has not overridden 'resolve_path' method")
+        end
+
+        def resolve_path_to_url(path)
+          "file://#{resolve_path(path)}"
+        end
+
         protected
 
         def _base_directory

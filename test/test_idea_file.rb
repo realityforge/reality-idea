@@ -30,6 +30,10 @@ class Reality::Idea::TestIdeaFile < Reality::Idea::TestCase
       'xml'
     end
 
+    def resolve_path(path)
+      resolve_path_from_base(path, 'MODULE_DIR')
+    end
+
     protected
 
     def _base_directory
@@ -90,5 +94,11 @@ class Reality::Idea::TestIdeaFile < Reality::Idea::TestCase
     element1 = TestElement.new('core', dir)
     assert_equal '$MODULE_DIR$/src/main/java', element1.send(:resolve_path_from_base, "#{dir}/src/main/java", 'MODULE_DIR')
     assert_equal '$MAVEN_REPOSITORY$/org/realityforge/lib/3.0/lib-3.0.jar', element1.send(:resolve_path_from_base, "#{MAVEN_REPOSITORY_DIR}/org/realityforge/lib/3.0/lib-3.0.jar", 'MODULE_DIR')
+  end
+
+  def test_resolve_path_to_url
+    dir = self.random_local_dir
+    element1 = TestElement.new('core', dir)
+    assert_equal 'file://$MODULE_DIR$/src/main/java', element1.resolve_path_to_url("#{dir}/src/main/java")
   end
 end
