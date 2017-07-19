@@ -66,7 +66,7 @@ class Reality::Idea::TestCase < Minitest::Test
   end
 
   def working_dir
-    @working_dir ||= "#{workspace_dir}/#{self.class.name.gsub(/\.\:/,'_')}_#{name}_#{::SecureRandom.hex}"
+    @working_dir ||= "#{workspace_dir}/#{self.class.name.gsub(/[\.\:]/, '_')}_#{name}_#{::SecureRandom.hex}"
   end
 
   def workspace_dir
