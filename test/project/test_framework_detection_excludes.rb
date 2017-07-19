@@ -42,9 +42,9 @@ class Reality::Idea::TestFrameworkDetectionExcludes < Reality::Idea::TestCase
 
     assert_equal <<XML.strip, project.framework_detection_excludes.to_xml.to_s
 <component name="FrameworkDetectionExcludesConfiguration">
-  <file url="$PROJECT_DIR$/artifacts"/>
-  <file url="$PROJECT_DIR$/target"/>
-  <file url="$PROJECT_DIR$/tmp"/>
+  <file url="file://$PROJECT_DIR$/artifacts"/>
+  <file url="file://$PROJECT_DIR$/target"/>
+  <file url="file://$PROJECT_DIR$/tmp"/>
 </component>
 XML
   end

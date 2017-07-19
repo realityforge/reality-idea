@@ -36,7 +36,7 @@ module Reality
 
         def build_component(xml)
           self.paths.each do |path|
-            xml.file(:url => self.project.resolve_path(path))
+            xml.file(:url => self.project.resolve_path_to_url(path))
           end
         end
       end
