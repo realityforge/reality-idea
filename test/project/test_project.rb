@@ -12,7 +12,7 @@
 # limitations under the License.
 #
 
-require File.expand_path('../helper', __FILE__)
+require File.expand_path('../../helper', __FILE__)
 
 class Reality::Idea::TestProject < Reality::Idea::TestCase
 
