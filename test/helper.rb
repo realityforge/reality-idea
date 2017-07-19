@@ -58,7 +58,7 @@ class Reality::Idea::TestCase < Minitest::Test
   end
 
   def random_local_dir
-    local_dir(::SecureRandom.hex)
+    local_dir(random_string)
   end
 
   def local_dir(directory)
@@ -89,5 +89,9 @@ class Reality::Idea::TestCase < Minitest::Test
 
     yield component if block_given?
     component
+  end
+
+  def random_string
+    ::SecureRandom.hex
   end
 end
