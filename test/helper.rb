@@ -94,4 +94,10 @@ class Reality::Idea::TestCase < Minitest::Test
   def random_string
     ::SecureRandom.hex
   end
+
+  def create_project(options = {}, &block)
+    name = options[:name] || self.random_string
+    project_directory = options[:project_directory] || self.random_local_dir
+    Reality::Idea::Model::Project.new(name, :project_directory => project_directory, &block)
+  end
 end
