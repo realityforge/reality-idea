@@ -18,12 +18,9 @@ class Reality::Idea::TestSettingsComponent < Reality::Idea::TestCase
   def test_settings
     project = Reality::Idea::Model::Project.new('acal', :project_directory => self.random_local_dir)
     mod = Reality::Idea::Model::RubyModule.new(project, 'acal')
-
-    assert_equal mod.components.size, 0
-    assert_equal mod.settings.load_path, []
-    assert_equal mod.components.size, 1
-    assert_equal mod.settings.load_path, []
-    assert_equal mod.components.size, 1
+    assert_component(mod,
+                     :settings,
+                     Reality::Idea::Model::RModuleSettingsStorageComponent)
 
     mod.settings.load_path << "#{mod.module_directory}/lib"
     mod.settings.load_path << "#{mod.module_directory}/test"

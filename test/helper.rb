@@ -78,4 +78,16 @@ class Reality::Idea::TestCase < Minitest::Test
       yield block
     end
   end
+
+  def assert_component(component_container, key, expected_type)
+    assert_equal component_container.components.size, 0
+    component = component_container.send(key)
+    assert_equal true, component.singleton_class.include?(expected_type)
+    assert_equal component_container.components.size, 1
+    assert_equal component, component_container.send(key)
+    assert_equal component_container.components.size, 1
+
+    yield component if block_given?
+    component
+  end
 end
