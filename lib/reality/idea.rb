@@ -28,5 +28,6 @@ require 'reality/idea/base_module'
 
 require 'reality/idea/project/framework_detection_excludes'
 require 'reality/idea/project/project'
+
 require 'reality/idea/ruby/settings_component'
 require 'reality/idea/ruby/ruby_module'
