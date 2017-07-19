@@ -12,11 +12,6 @@
 # limitations under the License.
 #
 
-=begin
-<component name="FrameworkDetectionExcludesConfiguration">
-    <file url="file://$PROJECT_DIR$/artifacts" />
-  </component>
-=end
 module Reality
   module Idea
     module Model
