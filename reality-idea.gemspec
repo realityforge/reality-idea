@@ -25,6 +25,10 @@ Gem::Specification.new do |s|
   s.add_dependency 'reality-model', '>= 1.3.0'
   s.add_dependency 'builder', '= 3.2.2'
 
+  s.add_development_dependency 'nokogiri', '= 1.7.2'
+  s.add_development_dependency 'tdiff', '= 0.3.3'
+  s.add_development_dependency 'nokogiri-diff', '= 0.2.0'
+
   s.add_development_dependency(%q<minitest>, ['= 5.9.1'])
   s.add_development_dependency(%q<test-unit>, ['= 3.1.5'])
 end

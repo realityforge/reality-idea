@@ -18,6 +18,7 @@ require 'securerandom'
 require 'minitest/autorun'
 require 'test/unit/assertions'
 require 'reality/idea'
+require 'nokogiri/diff'
 
 module Reality::Idea
   class << self
@@ -89,6 +90,15 @@ class Reality::Idea::TestCase < Minitest::Test
 
     yield component if block_given?
     component
+  end
+
+  def assert_xml_equal(expected_xml, actual_xml)
+    expected_doc = Nokogiri::XML(expected_xml)
+    actual_doc = Nokogiri::XML(actual_xml)
+
+    expected_doc.diff(actual_doc) do |change, node|
+      fail "Unexpected diff between two documents.\n#{change}" if change.strip != ''
+    end
   end
 
   def random_string
