@@ -62,8 +62,7 @@ XML
 
   def test_to_xml
     element = TestElement.new('core', create_container)
-    result = element.to_xml
-    assert_equal <<XML.strip, result.to_s
+    assert_equal <<XML.strip, element.to_xml.to_s
 <component name="core">
   <myChild myAttr="3">
     <myChild/>
