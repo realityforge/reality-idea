@@ -49,6 +49,10 @@ module Reality
           component_by_type(SqlDialectMappings)
         end
 
+        def vcs_directory_mappings
+          component_by_type(VcsDirectoryMappings)
+        end
+
         protected
 
         def pre_init
