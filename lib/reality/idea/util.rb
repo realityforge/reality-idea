@@ -34,7 +34,8 @@ module Reality
         # relative_path( '/home/bob/../bob/foo', '/home/bob') => 'foo'
         #
         def relative_path(path, directory)
-          Pathname.new(File.expand_path(path)).relative_path_from(Pathname.new(File.expand_path(directory))).to_s
+          path = Pathname.new(File.expand_path(path)).relative_path_from(Pathname.new(File.expand_path(directory))).to_s
+          path == '.' ? '' : path
         end
       end
     end
