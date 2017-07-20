@@ -57,6 +57,10 @@ module Reality
           component_by_type(ProjectDetails)
         end
 
+        def module_manager
+          component_by_type(ModuleManager)
+        end
+
         protected
 
         def pre_init
