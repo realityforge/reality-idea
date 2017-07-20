@@ -62,4 +62,12 @@ XML
     assert_equal 'Git', project.vcs_directory_mappings.mappings.keys[0]
     assert_equal project.project_directory, project.vcs_directory_mappings.mappings.values[0]
   end
+
+  def test_detect_vcs_svn
+    project = create_project
+    FileUtils.mkdir_p "#{project.project_directory}/.svn"
+    assert_equal 1, project.vcs_directory_mappings.mappings.size
+    assert_equal 'svn', project.vcs_directory_mappings.mappings.keys[0]
+    assert_equal project.project_directory, project.vcs_directory_mappings.mappings.values[0]
+  end
 end

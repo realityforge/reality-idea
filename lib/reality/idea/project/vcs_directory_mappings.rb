@@ -32,10 +32,20 @@ module Reality
           add('svn', path)
         end
 
+        # Attempt to detect the vcs for specified directory and add mapping as appropriate
+        def detect_vcs(directory)
+          if File.exist?("#{directory}/.git")
+            add_git(directory)
+          elsif File.exist?("#{directory}/.svn")
+            add_svn(directory)
+          end
+        end
+
         protected
 
         def component_init
           @mappings = {}
+          detect_vcs(self.project.project_directory)
         end
 
         def build_component(xml)
