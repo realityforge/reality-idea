@@ -20,6 +20,7 @@ class Reality::Idea::TestBaseComponent < Reality::Idea::TestCase
 
     def initialize(name, component_container)
       @name, @component_container = name, component_container
+      @component_attributes = {}
     end
 
     attr_reader :name
@@ -28,6 +29,12 @@ class Reality::Idea::TestBaseComponent < Reality::Idea::TestCase
       xml.myChild(:myAttr => 3) do
         xml.myChild
       end
+    end
+
+    attr_writer :component_attributes
+
+    def build_component_attributes
+      @component_attributes
     end
 
     def component_container
@@ -64,6 +71,19 @@ XML
     element = TestElement.new('core', create_container)
     assert_xml_equal <<XML.strip, element.to_xml.to_s
 <component name="core">
+  <myChild myAttr="3">
+    <myChild/>
+  </myChild>
+</component>
+XML
+  end
+
+  def test_to_xml_with_attributes
+    element = TestElement.new('core', create_container)
+    element.component_attributes = { 'a' => 1 }
+
+    assert_xml_equal <<XML.strip, element.to_xml.to_s
+<component name="core" a="1">
   <myChild myAttr="3">
     <myChild/>
   </myChild>

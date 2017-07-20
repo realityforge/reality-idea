@@ -33,11 +33,17 @@ module Reality
           Reality::Idea.error("Component #{self.name} has not overridden 'build_component' method")
         end
 
+        def build_component_attributes
+          {}
+        end
+
         private
 
         def create_component(name)
+          component_attributes = {:name => name}.merge(self.build_component_attributes)
           target = StringIO.new
-          Builder::XmlMarkup.new(:target => target, :indent => 2).component({ :name => name }) do |xml|
+          Builder::XmlMarkup.new(:target => target, :indent => 2).
+            component(component_attributes) do |xml|
             yield xml if block_given?
           end
           Reality::Idea::Util.new_document(target.string).root
