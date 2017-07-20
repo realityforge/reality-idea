@@ -41,6 +41,10 @@ module Reality
           component_by_type(FrameworkDetectionExcludes)
         end
 
+        def tasks
+          component_by_type(Tasks)
+        end
+
         protected
 
         def pre_init

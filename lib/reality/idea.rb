@@ -16,7 +16,7 @@ require 'rexml/document'
 require 'builder'
 require 'pathname'
 
-require 'reality/logging'
+require 'reality/core'
 require 'reality/model'
 
 require 'reality/idea/model'
@@ -28,6 +28,7 @@ require 'reality/idea/base_module'
 
 require 'reality/idea/project/project_component'
 require 'reality/idea/project/framework_detection_excludes'
+require 'reality/idea/project/tasks'
 require 'reality/idea/project/project'
 
 require 'reality/idea/ruby/ruby_module_component'
