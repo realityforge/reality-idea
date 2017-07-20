@@ -40,7 +40,7 @@ class Reality::Idea::TestFrameworkDetectionExcludes < Reality::Idea::TestCase
     project.framework_detection_excludes.paths << "#{project.project_directory}/target"
     project.framework_detection_excludes.paths << "#{project.project_directory}/tmp"
 
-    assert_xml_equal <<XML.strip, project.framework_detection_excludes.to_xml.to_s
+    assert_xml_equal <<XML, project.framework_detection_excludes.to_xml.to_s
 <component name="FrameworkDetectionExcludesConfiguration">
   <file url="file://$PROJECT_DIR$/artifacts"/>
   <file url="file://$PROJECT_DIR$/target"/>

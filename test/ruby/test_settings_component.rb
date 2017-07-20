@@ -36,7 +36,7 @@ class Reality::Idea::TestSettingsComponent < Reality::Idea::TestCase
     mod.settings.load_path << "#{mod.module_directory}/lib"
     mod.settings.load_path << "#{mod.module_directory}/test"
 
-    assert_xml_equal <<XML.strip, mod.settings.to_xml.to_s
+    assert_xml_equal <<XML, mod.settings.to_xml.to_s
 <component name="RModuleSettingsStorage">
   <LOAD_PATH number="2" string0="$MODULE_DIR$/lib" string1="$MODULE_DIR$/test"/>
   <I18N_FOLDERS number="0"/>

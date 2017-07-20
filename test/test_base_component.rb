@@ -45,7 +45,7 @@ class Reality::Idea::TestBaseComponent < Reality::Idea::TestCase
   def test_create_component
     element = TestElement.new('core', create_project)
     result = element.send(:create_component, 'core')
-    assert_xml_equal <<XML.strip, result.to_s
+    assert_xml_equal <<XML, result.to_s
 <component name="core">
 </component>
 XML
@@ -58,7 +58,7 @@ XML
         xml.myChild
       end
     end
-    assert_xml_equal <<XML.strip, result.to_s
+    assert_xml_equal <<XML, result.to_s
 <component name="core">
   <myChild myAttr="3">
     <myChild/>
@@ -69,7 +69,7 @@ XML
 
   def test_to_xml
     element = TestElement.new('core', create_project)
-    assert_xml_equal <<XML.strip, element.to_xml.to_s
+    assert_xml_equal <<XML, element.to_xml.to_s
 <component name="core">
   <myChild myAttr="3">
     <myChild/>
@@ -82,7 +82,7 @@ XML
     element = TestElement.new('core', create_project)
     element.component_attributes = { 'a' => 1 }
 
-    assert_xml_equal <<XML.strip, element.to_xml.to_s
+    assert_xml_equal <<XML, element.to_xml.to_s
 <component name="core" a="1">
   <myChild myAttr="3">
     <myChild/>
