@@ -72,10 +72,6 @@ XML
 XML
   end
 
-  def test_component_by_type
-
-  end
-
   private
 
   def create_container
