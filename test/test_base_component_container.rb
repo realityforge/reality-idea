@@ -59,7 +59,7 @@ class Reality::Idea::TestBaseComponentContainer < Reality::Idea::TestCase
   end
 
   def test_component_by_type
-    container = create_container
+    container = create_project
 
     assert_equal container.components.size, 0
 
@@ -84,11 +84,5 @@ class Reality::Idea::TestBaseComponentContainer < Reality::Idea::TestCase
     assert_not_nil component2
     assert_equal component2.my_attr, 'value2'
     assert_equal component2.init_count, 1
-  end
-
-  private
-
-  def create_container
-    Reality::Idea::Model::Project.new('ignored', :project_directory => self.random_local_dir)
   end
 end
