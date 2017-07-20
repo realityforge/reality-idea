@@ -23,7 +23,6 @@ module Reality
         protected
 
         def component_init
-          Reality::Idea.error("Component #{self.name} expected to have name '#{NAME}'") unless self.name == NAME
           @load_path = []
         end
 
