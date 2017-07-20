@@ -47,14 +47,12 @@ module Reality
 
         private
 
-        def create_component(name)
-          component_attributes = {:name => name}.merge(self.build_component_attributes)
-          target = StringIO.new
-          Builder::XmlMarkup.new(:target => target, :indent => 2).
-            component(component_attributes) do |xml|
-            yield xml if block_given?
+        def create_component(name, &block)
+          Reality::Idea::Util.build_xml do |xml|
+            xml.component({ :name => name }.merge(self.build_component_attributes)) do
+              yield xml if block_given?
+            end
           end
-          Reality::Idea::Util.new_document(target.string).root
         end
       end
     end

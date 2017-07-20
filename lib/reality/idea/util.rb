@@ -20,6 +20,13 @@ module Reality
           REXML::Document.new(value, :attribute_quote => :quote)
         end
 
+        def build_xml(&block)
+          target = StringIO.new
+          xml = Builder::XmlMarkup.new(:target => target, :indent => 2)
+          block.call(xml)
+          new_document(target.string).root
+        end
+
         # Calculate the relative path between "path" and "directory" parameters.
         # i.e
         # relative_path( '/home/bob/foo', '/home/bob') => 'foo'
