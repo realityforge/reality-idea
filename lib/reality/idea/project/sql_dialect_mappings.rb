@@ -40,7 +40,7 @@ module Reality
 
         def build_component(xml)
           self.mappings.each_pair do |dialect, path|
-            xml.file(:url => self.component_container.resolve_path_to_url(path), :dialect => dialect)
+            xml.file(:url => self.resolve_path_to_url(path), :dialect => dialect)
           end
         end
       end

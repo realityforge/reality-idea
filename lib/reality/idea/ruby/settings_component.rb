@@ -29,7 +29,7 @@ module Reality
         def build_component(xml)
           load_path_attr = { :number => self.load_path.size }
           self.load_path.each_with_index do |path, i|
-            load_path_attr["string#{i}"] = self.component_container.resolve_path(path)
+            load_path_attr["string#{i}"] = self.resolve_path(path)
           end
           xml.LOAD_PATH(load_path_attr)
           xml.I18N_FOLDERS(:number => 0)

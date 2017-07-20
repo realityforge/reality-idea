@@ -40,7 +40,7 @@ module Reality
 
         def build_component(xml)
           self.mappings.each_pair do |vcs, path|
-            xml.mapping(:directory => self.component_container.resolve_path(path), :vcs => vcs)
+            xml.mapping(:directory => self.resolve_path(path), :vcs => vcs)
           end
         end
       end
