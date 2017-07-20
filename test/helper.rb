@@ -96,8 +96,14 @@ class Reality::Idea::TestCase < Minitest::Test
     expected_doc = Nokogiri::XML(expected_xml)
     actual_doc = Nokogiri::XML(actual_xml)
 
-    expected_doc.diff(actual_doc) do |change, node|
-      fail "Unexpected diff between two documents.\n#{change}" if change.strip != ''
+    unless expected_doc.tdiff_equal(actual_doc)
+      lines = ''
+      failed = false
+      expected_doc.diff(actual_doc) do |change, node|
+        failed = true if change.strip != ''
+        lines += "#{change} #{node.to_xml}".ljust(30) + "#{node.parent.path}\n"
+      end
+      fail "Unexpected diff between two documents.\n\n#{lines}\n\nActual:#{actual_doc}" if failed
     end
   end
 
