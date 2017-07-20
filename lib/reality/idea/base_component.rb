@@ -23,6 +23,14 @@ module Reality
           end
         end
 
+        def resolve_path(path)
+          component_container.resolve_path(path)
+        end
+
+        def resolve_path_to_url(path)
+          component_container.resolve_path_to_url(path)
+        end
+
         protected
 
         def component_container

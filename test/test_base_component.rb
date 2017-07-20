@@ -90,4 +90,12 @@ XML
 </component>
 XML
   end
+
+  def test_resolve_methods
+    project = create_project
+    element = TestElement.new('core', project)
+
+    assert_equal '$PROJECT_DIR$/src', element.resolve_path("#{project.project_directory}/src")
+    assert_equal 'file://$PROJECT_DIR$/src', element.resolve_path_to_url("#{project.project_directory}/src")
+  end
 end
