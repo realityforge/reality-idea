@@ -45,6 +45,10 @@ module Reality
           component_by_type(Tasks)
         end
 
+        def sql_dialect_mappings
+          component_by_type(SqlDialectMappings)
+        end
+
         protected
 
         def pre_init
