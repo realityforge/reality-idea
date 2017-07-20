@@ -43,7 +43,7 @@ class Reality::Idea::TestBaseComponent < Reality::Idea::TestCase
   end
 
   def test_create_component
-    element = TestElement.new('core', create_container)
+    element = TestElement.new('core', create_project)
     result = element.send(:create_component, 'core')
     assert_xml_equal <<XML.strip, result.to_s
 <component name="core">
@@ -52,7 +52,7 @@ XML
   end
 
   def test_create_component_with_block
-    element = TestElement.new('core', create_container)
+    element = TestElement.new('core', create_project)
     result = element.send(:create_component, 'core') do |xml|
       xml.myChild(:myAttr => 3) do
         xml.myChild
@@ -68,7 +68,7 @@ XML
   end
 
   def test_to_xml
-    element = TestElement.new('core', create_container)
+    element = TestElement.new('core', create_project)
     assert_xml_equal <<XML.strip, element.to_xml.to_s
 <component name="core">
   <myChild myAttr="3">
@@ -79,7 +79,7 @@ XML
   end
 
   def test_to_xml_with_attributes
-    element = TestElement.new('core', create_container)
+    element = TestElement.new('core', create_project)
     element.component_attributes = { 'a' => 1 }
 
     assert_xml_equal <<XML.strip, element.to_xml.to_s
@@ -89,11 +89,5 @@ XML
   </myChild>
 </component>
 XML
-  end
-
-  private
-
-  def create_container
-    Reality::Idea::Model::Project.new('ignored', :project_directory => self.random_local_dir)
   end
 end
