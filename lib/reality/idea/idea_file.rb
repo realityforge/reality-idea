@@ -77,7 +77,9 @@ module Reality
             return path.sub(path_prefix, "$#{key}$") if path.to_s.index(path_prefix) == 0
           end
           begin
-            return "$#{base_variable}$/#{relative_path(path)}"
+            relative_path = relative_path(path)
+            prefix = "$#{base_variable}$"
+            return relative_path == '' ? prefix : "#{prefix}/#{relative_path}"
           rescue ArgumentError
             # ArgumentError happens on windows when self._base_directory and path are on different drives
             return path
