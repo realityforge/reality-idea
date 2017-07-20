@@ -30,6 +30,7 @@ require 'reality/idea/project/project_component'
 require 'reality/idea/project/framework_detection_excludes'
 require 'reality/idea/project/sql_dialect_mappings'
 require 'reality/idea/project/vcs_directory_mappings'
+require 'reality/idea/project/project_details'
 require 'reality/idea/project/tasks'
 require 'reality/idea/project/project'
 

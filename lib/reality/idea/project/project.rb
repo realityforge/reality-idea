@@ -53,6 +53,10 @@ module Reality
           component_by_type(VcsDirectoryMappings)
         end
 
+        def details
+          component_by_type(ProjectDetails)
+        end
+
         protected
 
         def pre_init
