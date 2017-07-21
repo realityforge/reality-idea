@@ -34,12 +34,24 @@ class Reality::Idea::TestFacet < Reality::Idea::TestCase
     end
   end
 
+  module TestFacet2
+    NAME = 'EJB'
+    TYPE = 'ejb'
+  end
+
   def test_create
     facet = Reality::Idea::Model::Facet.new(nil, TestFacet)
 
     assert_equal'GWT', facet.name
     assert_equal'gwt', facet.type
     assert_equal true, facet.init_performed?
+  end
+
+  def test_create_with_no_init
+    facet = Reality::Idea::Model::Facet.new(nil, TestFacet2)
+
+    assert_equal'EJB', facet.name
+    assert_equal'ejb', facet.type
   end
 
   def test_to_xml
