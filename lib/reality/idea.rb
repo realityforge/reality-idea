@@ -35,6 +35,7 @@ require 'reality/idea/project/project_details'
 require 'reality/idea/project/tasks'
 require 'reality/idea/project/project'
 
+require 'reality/idea/generic_components/facets/facet'
 require 'reality/idea/ruby/ruby_module_component'
 require 'reality/idea/ruby/settings_component'
 require 'reality/idea/ruby/ruby_module'
