@@ -29,6 +29,28 @@ class Reality::Idea::TestPluginDependencies < Reality::Idea::TestCase
     assert_equal %w(GlassFish com.intellij.gwt), project.plugin_dependencies.plugins
   end
 
+  def test_duplicate_adds_ignored
+    project = create_project
+
+    assert_equal [], project.plugin_dependencies.plugins
+    project.plugin_dependencies.add('GlassFish')
+    project.plugin_dependencies.add('GlassFish')
+    project.plugin_dependencies.add('GlassFish')
+    project.plugin_dependencies.add('com.intellij.gwt')
+    project.plugin_dependencies.add('GlassFish')
+    project.plugin_dependencies.add('com.intellij.gwt')
+
+    assert_equal %w(GlassFish com.intellij.gwt), project.plugin_dependencies.plugins
+  end
+
+  def test_plugins_returns_copy
+    project = create_project
+
+    assert_equal [], project.plugin_dependencies.plugins
+    project.plugin_dependencies.plugins << 'GlassFish'
+    assert_equal [], project.plugin_dependencies.plugins
+  end
+
   def test_to_xml
     project = create_project
 

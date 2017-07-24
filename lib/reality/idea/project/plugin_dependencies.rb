@@ -18,10 +18,13 @@ module Reality
       module PluginDependencies
         NAME = 'ExternalDependencies'
 
-        attr_accessor :plugins
+        def plugins
+          @plugins.dup
+        end
 
         def add(plugin_id)
-          @plugins << plugin_id
+          @plugins << plugin_id unless @plugins.include?(plugin_id)
+          plugin_id
         end
 
         protected
