@@ -30,6 +30,16 @@ module Reality
           component_by_type(RModuleSettingsStorageComponent)
         end
 
+        def to_xml
+          Reality::Idea::Util.build_xml do |xml|
+            xml.tag!(:module, :type => 'RUBY_MODULE', :version => '4') do
+              self.components.each do |component|
+                component.build_xml(xml)
+              end
+            end
+          end
+        end
+
         protected
 
         def pre_init

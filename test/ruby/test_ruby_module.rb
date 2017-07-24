@@ -87,4 +87,29 @@ class Reality::Idea::TestRubyModule < Reality::Idea::TestCase
     mod.ruby_development_kit = '2.42'
     assert_equal '2.42', mod.ruby_development_kit
   end
+
+  def test_to_xml_with_no_components
+    mod = Reality::Idea::Model::RubyModule.new(create_project, 'acal')
+
+    assert_xml_equal <<XML, mod.to_xml.to_s
+<module type="RUBY_MODULE" version="4">
+</module>
+XML
+  end
+
+  def test_to_xml_with_components
+    mod = Reality::Idea::Model::RubyModule.new(create_project, 'acal')
+
+    mod.settings.load_path << "#{mod.module_directory}/lib"
+    mod.settings.load_path << "#{mod.module_directory}/test"
+
+    assert_xml_equal <<XML, mod.to_xml.to_s
+<module type="RUBY_MODULE" version="4">
+  <component name="RModuleSettingsStorage">
+    <LOAD_PATH number="2" string0="$MODULE_DIR$/lib" string1="$MODULE_DIR$/test"/>
+    <I18N_FOLDERS number="0"/>
+  </component>
+</module>
+XML
+  end
 end
