@@ -61,6 +61,10 @@ module Reality
           component_by_type(ModuleManager)
         end
 
+        def plugin_dependencies
+          component_by_type(PluginDependencies)
+        end
+
         protected
 
         def pre_init
