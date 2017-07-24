@@ -34,14 +34,14 @@ class Reality::Idea::TestVcsDirectoryMappings < Reality::Idea::TestCase
     assert_equal({ 'FOO' => project.project_directory, 'Git' => "#{project.project_directory}/dir1", 'svn' => "#{project.project_directory}/dir2" }, project.vcs_directory_mappings.mappings)
   end
 
-  def test_to_xml
+  def test_build_xml
     project = create_project
 
     project.vcs_directory_mappings.add('Other',"#{project.project_directory}")
     project.vcs_directory_mappings.add_git("#{project.project_directory}/vendor/dir1")
     project.vcs_directory_mappings.add_svn("#{project.project_directory}/vendor/dir2")
 
-    assert_xml_equal <<XML, project.vcs_directory_mappings.to_xml.to_s
+    assert_xml_equal <<XML, component_to_xml(project.vcs_directory_mappings)
 <component name="VcsDirectoryMappings">
   <mapping directory="$PROJECT_DIR$" vcs="Other"/>
   <mapping directory="$PROJECT_DIR$/vendor/dir1" vcs="Git"/>

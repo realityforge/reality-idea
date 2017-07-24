@@ -54,7 +54,7 @@ class Reality::Idea::TestFacet < Reality::Idea::TestCase
     assert_equal'ejb', facet.type
   end
 
-  def test_to_xml
+  def test_build_xml
     facet = Reality::Idea::Model::Facet.new(nil, TestFacet)
 
     actual_xml = Reality::Idea::Util.build_xml {|xml| facet.build_xml(xml)}.to_s

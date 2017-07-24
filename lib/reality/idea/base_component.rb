@@ -17,8 +17,8 @@ module Reality
     module Model
       # The BaseComponent should be mixed into all elements that represent IDEA components (Project or Module)
       module BaseComponent
-        def to_xml
-          create_component(self.name) do |xml|
+        def build_xml(xml)
+          create_component(xml, self.name) do
             build_component(xml)
           end
         end
@@ -47,11 +47,9 @@ module Reality
 
         private
 
-        def create_component(name, &block)
-          Reality::Idea::Util.build_xml do |xml|
-            xml.component({ :name => name }.merge(self.build_component_attributes)) do
-              yield xml if block_given?
-            end
+        def create_component(xml, name)
+          xml.component({ :name => name }.merge(self.build_component_attributes)) do
+            yield xml if block_given?
           end
         end
       end

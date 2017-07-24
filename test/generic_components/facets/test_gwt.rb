@@ -37,7 +37,7 @@ class Reality::Idea::TestGwtFacet < Reality::Idea::TestCase
     assert_equal({ 'com.biz.Foo' => true, 'com.biz.Bar' => false }, facet.gwt_modules)
   end
 
-  def test_to_xml
+  def test_build_xml
     facet = Reality::Idea::Model::Facet.new(nil, Reality::Idea::Model::GwtFacet)
 
     facet.setting('myKey', 'myValue')

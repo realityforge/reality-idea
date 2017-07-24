@@ -23,10 +23,10 @@ class Reality::Idea::TestProjectDetails < Reality::Idea::TestCase
                      Reality::Idea::Model::ProjectDetails)
   end
 
-  def test_to_xml
+  def test_build_xml
     project = create_project
 
-    assert_xml_equal <<XML, project.details.to_xml.to_s
+    assert_xml_equal <<XML, component_to_xml(project.details)
 <component name="ProjectDetails">
   <option name="projectName" value="#{project.name}"/>
 </component>

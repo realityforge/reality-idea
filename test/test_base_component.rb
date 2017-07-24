@@ -44,7 +44,9 @@ class Reality::Idea::TestBaseComponent < Reality::Idea::TestCase
 
   def test_create_component
     element = TestElement.new('core', create_project)
-    result = element.send(:create_component, 'core')
+    result = Reality::Idea::Util.build_xml do |xml|
+      element.send(:create_component, xml, 'core')
+    end
     assert_xml_equal <<XML, result.to_s
 <component name="core">
 </component>
@@ -53,9 +55,11 @@ XML
 
   def test_create_component_with_block
     element = TestElement.new('core', create_project)
-    result = element.send(:create_component, 'core') do |xml|
-      xml.myChild(:myAttr => 3) do
-        xml.myChild
+    result = Reality::Idea::Util.build_xml do |xml|
+      element.send(:create_component, xml, 'core') do
+        xml.myChild(:myAttr => 3) do
+          xml.myChild
+        end
       end
     end
     assert_xml_equal <<XML, result.to_s
@@ -67,9 +71,9 @@ XML
 XML
   end
 
-  def test_to_xml
+  def test_build_xml
     element = TestElement.new('core', create_project)
-    assert_xml_equal <<XML, element.to_xml.to_s
+    assert_xml_equal <<XML, component_to_xml(element)
 <component name="core">
   <myChild myAttr="3">
     <myChild/>
@@ -78,11 +82,11 @@ XML
 XML
   end
 
-  def test_to_xml_with_attributes
+  def test_build_xml_with_attributes
     element = TestElement.new('core', create_project)
     element.component_attributes = { 'a' => 1 }
 
-    assert_xml_equal <<XML, element.to_xml.to_s
+    assert_xml_equal <<XML, component_to_xml(element)
 <component name="core" a="1">
   <myChild myAttr="3">
     <myChild/>

@@ -92,6 +92,12 @@ class Reality::Idea::TestCase < Minitest::Test
     component
   end
 
+  def component_to_xml(component)
+    Reality::Idea::Util.build_xml do |xml|
+      component.build_xml(xml)
+    end.to_s
+  end
+
   def assert_xml_equal(expected_xml, actual_xml)
     expected_doc = Nokogiri::XML(expected_xml)
     actual_doc = Nokogiri::XML(actual_xml)

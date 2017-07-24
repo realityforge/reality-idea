@@ -23,39 +23,39 @@ class Reality::Idea::TestTasks < Reality::Idea::TestCase
                      Reality::Idea::Model::Tasks)
   end
 
-  def test_to_xml
+  def test_build_xml
     project = create_project
 
-    assert_xml_equal <<XML, project.tasks.to_xml.to_s
+    assert_xml_equal <<XML, component_to_xml(project.tasks)
 <component name="ProjectTasksOptions">
 </component>
 XML
   end
 
-  def test_to_xml_single_suppressed_tasks
+  def test_build_xml_single_suppressed_tasks
     project = create_project
 
     project.tasks.suppressed_tasks << 'Babel'
 
-    assert_xml_equal <<XML, project.tasks.to_xml.to_s
+    assert_xml_equal <<XML, component_to_xml(project.tasks)
 <component name="ProjectTasksOptions" suppressed-tasks="Babel">
 </component>
 XML
   end
 
-  def test_to_xml_multiple_suppressed_tasks
+  def test_build_xml_multiple_suppressed_tasks
     project = create_project
 
     project.tasks.suppressed_tasks << 'Babel'
     project.tasks.suppressed_tasks << 'Sass'
 
-    assert_xml_equal <<XML, project.tasks.to_xml.to_s
+    assert_xml_equal <<XML, component_to_xml(project.tasks)
 <component name="ProjectTasksOptions" suppressed-tasks="Babel,Sass">
 </component>
 XML
   end
 
-  def test_to_xml_include_tasks
+  def test_build_xml_include_tasks
     project = create_project
 
     project.tasks.task('Prettier - TSX',
@@ -64,7 +64,7 @@ XML
                        :file_extension => 'tsx',
                        :check_syntax_errors => false )
 
-    assert_xml_equal <<XML, project.tasks.to_xml.to_s
+    assert_xml_equal <<XML, component_to_xml(project.tasks)
 <component name="ProjectTasksOptions">
   <TaskOptions isEnabled="true">
     <option name="arguments" value="--print-width 120 --single-quote --write $FilePathRelativeToProjectRoot$"/>
@@ -90,7 +90,7 @@ XML
   end
 
 
-  def test_to_xml_include_multiple_tasks
+  def test_build_xml_include_multiple_tasks
     project = create_project
 
     project.tasks.task('Prettier - TS',
@@ -104,7 +104,7 @@ XML
                        :file_extension => 'tsx',
                        :check_syntax_errors => false )
 
-    assert_xml_equal <<XML, project.tasks.to_xml.to_s
+    assert_xml_equal <<XML, component_to_xml(project.tasks)
 <component name="ProjectTasksOptions">
   <TaskOptions isEnabled="true">
     <option name="arguments" value="--print-width 120 --single-quote --write $FilePathRelativeToProjectRoot$"/>

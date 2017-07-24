@@ -34,13 +34,13 @@ class Reality::Idea::TestSqlDialectMappings < Reality::Idea::TestCase
     assert_equal({ 'FOO' => project.project_directory, 'TSQL' => "#{project.project_directory}/sql", 'PostgreSQL' => "#{project.project_directory}/pgsql" }, project.sql_dialect_mappings.mappings)
   end
 
-  def test_to_xml
+  def test_build_xml
     project = create_project
 
     project.sql_dialect_mappings.add_mssql("#{project.project_directory}/database/mssql")
     project.sql_dialect_mappings.add_postgres("#{project.project_directory}/database/pgsql")
 
-    assert_xml_equal <<XML, project.sql_dialect_mappings.to_xml.to_s
+    assert_xml_equal <<XML, component_to_xml(project.sql_dialect_mappings)
 <component name="SqlDialectMappings">
   <file dialect="TSQL" url="file://$PROJECT_DIR$/database/mssql"/>
   <file dialect="PostgreSQL" url="file://$PROJECT_DIR$/database/pgsql"/>

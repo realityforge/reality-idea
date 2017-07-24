@@ -29,14 +29,14 @@ class Reality::Idea::TestSettingsComponent < Reality::Idea::TestCase
     assert_equal mod.settings.load_path, %W(#{mod.module_directory}/lib #{mod.module_directory}/test #{mod.module_directory}/spec)
   end
 
-  def test_to_xml
+  def test_build_xml
     project = Reality::Idea::Model::Project.new('acal', :project_directory => self.random_local_dir)
     mod = Reality::Idea::Model::RubyModule.new(project, 'acal')
 
     mod.settings.load_path << "#{mod.module_directory}/lib"
     mod.settings.load_path << "#{mod.module_directory}/test"
 
-    assert_xml_equal <<XML, mod.settings.to_xml.to_s
+    assert_xml_equal <<XML, component_to_xml(mod.settings)
 <component name="RModuleSettingsStorage">
   <LOAD_PATH number="2" string0="$MODULE_DIR$/lib" string1="$MODULE_DIR$/test"/>
   <I18N_FOLDERS number="0"/>

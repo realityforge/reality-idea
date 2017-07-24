@@ -51,13 +51,13 @@ class Reality::Idea::TestPluginDependencies < Reality::Idea::TestCase
     assert_equal [], project.plugin_dependencies.plugins
   end
 
-  def test_to_xml
+  def test_build_xml
     project = create_project
 
     project.plugin_dependencies.add('com.intellij.gwt')
     project.plugin_dependencies.add('GlassFish')
 
-    assert_xml_equal <<XML, project.plugin_dependencies.to_xml.to_s
+    assert_xml_equal <<XML, component_to_xml(project.plugin_dependencies)
 <component name="ExternalDependencies">
   <plugin id="GlassFish"/>
   <plugin id="com.intellij.gwt"/>

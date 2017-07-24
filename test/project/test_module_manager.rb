@@ -38,7 +38,7 @@ class Reality::Idea::TestModuleManager < Reality::Idea::TestCase
     assert_equal 'Backend', project.module_manager.modules[3].group
   end
 
-  def test_to_xml
+  def test_build_xml
     project = create_project
 
     project.module_manager.add("#{project.project_directory}/core/core.iml")
@@ -46,7 +46,7 @@ class Reality::Idea::TestModuleManager < Reality::Idea::TestCase
     project.module_manager.add("#{project.project_directory}/shared/shared.iml")
     project.module_manager.add("#{project.project_directory}/server/server.iml", :group => 'Backend')
 
-    assert_xml_equal <<XML, project.module_manager.to_xml.to_s
+    assert_xml_equal <<XML, component_to_xml(project.module_manager)
 <component name="ProjectModuleManager">
   <modules>
     <module filepath="$PROJECT_DIR$/core/core.iml" fileurl="file://$PROJECT_DIR$/core/core.iml"/>
