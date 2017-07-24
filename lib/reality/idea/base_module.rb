@@ -33,7 +33,25 @@ module Reality
           resolve_path_from_base(path, 'MODULE_DIR')
         end
 
+        def to_xml
+          Reality::Idea::Util.build_xml do |xml|
+            xml.tag!(:module, additional_module_attributes.merge(:type => module_type)) do
+              self.components.sort_by {|component| component.name}.each do |component|
+                component.build_xml(xml)
+              end
+            end
+          end
+        end
+
         protected
+
+        def module_type
+          Reality::Idea.error("Module #{self.name} has not overridden 'module_type' method")
+        end
+
+        def additional_module_attributes
+          {}
+        end
 
         def _base_directory
           self.module_directory
