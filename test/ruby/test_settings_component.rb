@@ -16,8 +16,7 @@ require File.expand_path('../../helper', __FILE__)
 
 class Reality::Idea::TestSettingsComponent < Reality::Idea::TestCase
   def test_settings
-    project = Reality::Idea::Model::Project.new('acal', :project_directory => self.random_local_dir)
-    mod = Reality::Idea::Model::RubyModule.new(project, 'acal')
+    mod = Reality::Idea::Model::RubyModule.new(create_project, 'acal')
     assert_component(mod,
                      :settings,
                      Reality::Idea::Model::RModuleSettingsStorageComponent)
@@ -30,8 +29,7 @@ class Reality::Idea::TestSettingsComponent < Reality::Idea::TestCase
   end
 
   def test_build_xml
-    project = Reality::Idea::Model::Project.new('acal', :project_directory => self.random_local_dir)
-    mod = Reality::Idea::Model::RubyModule.new(project, 'acal')
+    mod = Reality::Idea::Model::RubyModule.new(create_project, 'acal')
 
     mod.settings.load_path << "#{mod.module_directory}/lib"
     mod.settings.load_path << "#{mod.module_directory}/test"
