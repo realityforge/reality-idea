@@ -15,8 +15,24 @@
 require File.expand_path('../../../helper', __FILE__)
 
 class Reality::Idea::TestGwtFacet < Reality::Idea::TestCase
+  class TestFacetMananger
+    def initialize(project)
+      @project = project
+    end
+
+    attr_reader :project
+
+    def component_container
+      self
+    end
+  end
+
   def test_settings
-    facet = Reality::Idea::Model::Facet.new(nil, Reality::Idea::Model::GwtFacet)
+    project = create_project
+
+    assert_equal [], project.plugin_dependencies.plugins
+    facet = Reality::Idea::Model::Facet.new(TestFacetMananger.new(project), Reality::Idea::Model::GwtFacet)
+    assert_equal %w(com.intellij.gwt), project.plugin_dependencies.plugins
 
     assert_equal({}, facet.settings)
     facet.setting('myKey', 'myValue')
@@ -28,7 +44,10 @@ class Reality::Idea::TestGwtFacet < Reality::Idea::TestCase
   end
 
   def test_gwt_modules
-    facet = Reality::Idea::Model::Facet.new(nil, Reality::Idea::Model::GwtFacet)
+    project = create_project
+
+    facet = Reality::Idea::Model::Facet.new(TestFacetMananger.new(project), Reality::Idea::Model::GwtFacet)
+    assert_equal %w(com.intellij.gwt), project.plugin_dependencies.plugins
 
     assert_equal({}, facet.gwt_modules)
     facet.gwt_module('com.biz.Foo', true)
@@ -38,7 +57,10 @@ class Reality::Idea::TestGwtFacet < Reality::Idea::TestCase
   end
 
   def test_build_xml
-    facet = Reality::Idea::Model::Facet.new(nil, Reality::Idea::Model::GwtFacet)
+    project = create_project
+
+    facet = Reality::Idea::Model::Facet.new(TestFacetMananger.new(project), Reality::Idea::Model::GwtFacet)
+    assert_equal %w(com.intellij.gwt), project.plugin_dependencies.plugins
 
     facet.setting('myKey', 'myValue')
     facet.setting('myKey2', 'myValue2')

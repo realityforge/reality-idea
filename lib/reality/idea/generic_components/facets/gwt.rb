@@ -52,6 +52,7 @@ module Reality
         def facet_init
           @settings = {}
           @gwt_modules = {}
+          self.facet_manager.component_container.project.plugin_dependencies.add('com.intellij.gwt')
         end
       end
     end
