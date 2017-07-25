@@ -16,8 +16,6 @@ module Reality
   module Idea
     module Model
       class RubyModuleComponent
-        protected
-
         include BaseComponent
 
         def component_container
