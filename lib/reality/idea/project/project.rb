@@ -29,10 +29,6 @@ module Reality
           'ipr'
         end
 
-        def default_path_variables
-          {}
-        end
-
         def resolve_path(path)
           resolve_path_from_base(path, 'PROJECT_DIR')
         end
@@ -71,6 +67,10 @@ module Reality
 
         def project_root_manager
           component_by_type(ProjectRootManager)
+        end
+
+        def typescript_compiler
+          component_by_type(TypeScriptCompiler)
         end
 
         protected
