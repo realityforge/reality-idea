@@ -69,21 +69,22 @@ module Reality
         end
 
         def default_path_variables
-          Reality::Idea.error("IdeaFile #{self.name} has not overridden 'default_path_variables' method")
+          home_directory = File.expand_path('~/')
+          {
+            'USER_HOME' => home_directory,
+            'MAVEN_REPOSITORY' => "#{home_directory}/.m2/repository"
+          }
         end
 
         def resolve_path_from_base(path, base_variable)
-          path_variables.each_pair do |key, path_prefix|
-            return path.sub(path_prefix, "$#{key}$") if path.to_s.index(path_prefix) == 0
-          end
-          begin
-            relative_path = relative_path(path)
-            prefix = "$#{base_variable}$"
-            return relative_path == '' ? prefix : "#{prefix}/#{relative_path}"
-          rescue ArgumentError
-            # ArgumentError happens on windows when self._base_directory and path are on different drives
-            return path
-          end
+          relative_path = relative_path(path)
+          prefix = "$#{base_variable}$"
+          value = path_variables.collect do |key, path_prefix|
+            # noinspection RubyNestedTernaryOperatorsInspection
+            path.to_s.index(path_prefix) == 0 ? path.sub(path_prefix, "$#{key}$") : relative_path == '' ? prefix : "#{prefix}/#{relative_path}"
+          end.sort_by {|str| str.length}.first
+          value ||= relative_path == '' ? prefix : "#{prefix}/#{relative_path}"
+          return value
         end
 
         private

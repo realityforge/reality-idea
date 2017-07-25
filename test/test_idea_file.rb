@@ -15,6 +15,7 @@
 require File.expand_path('../helper', __FILE__)
 
 class Reality::Idea::TestIdeaFile < Reality::Idea::TestCase
+  USER_HOME_DIR = File.expand_path('~/')
   MAVEN_REPOSITORY_DIR = File.expand_path('~/.m2/repository')
   class TestElement
     include Reality::Idea::Model::IdeaFile
@@ -38,10 +39,6 @@ class Reality::Idea::TestIdeaFile < Reality::Idea::TestCase
 
     def _base_directory
       @directory
-    end
-
-    def default_path_variables
-      { 'MAVEN_REPOSITORY' => MAVEN_REPOSITORY_DIR }
     end
   end
 
@@ -84,7 +81,7 @@ class Reality::Idea::TestIdeaFile < Reality::Idea::TestCase
   def test_path_variables
     element1 = TestElement.new('core', self.random_local_dir)
 
-    assert_equal ({ 'MAVEN_REPOSITORY' => MAVEN_REPOSITORY_DIR }), element1.path_variables
+    assert_equal ({ 'USER_HOME' => USER_HOME_DIR, 'MAVEN_REPOSITORY' => MAVEN_REPOSITORY_DIR }), element1.path_variables
     element1.path_variables = { 'HOME' => '/User/bob' }
     assert_equal ({ 'HOME' => '/User/bob' }), element1.path_variables
   end
