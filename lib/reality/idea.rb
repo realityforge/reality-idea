@@ -34,6 +34,7 @@ require 'reality/idea/project/plugin_dependencies'
 require 'reality/idea/project/sql_dialect_mappings'
 require 'reality/idea/project/vcs_directory_mappings'
 require 'reality/idea/project/project_details'
+require 'reality/idea/project/project_root_manager'
 require 'reality/idea/project/tasks'
 require 'reality/idea/project/project'
 
