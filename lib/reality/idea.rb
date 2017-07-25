@@ -28,6 +28,7 @@ require 'reality/idea/base_module'
 
 require 'reality/idea/project/project_component'
 require 'reality/idea/project/framework_detection_excludes'
+require 'reality/idea/project/javascript_settings'
 require 'reality/idea/project/module_manager'
 require 'reality/idea/project/plugin_dependencies'
 require 'reality/idea/project/sql_dialect_mappings'

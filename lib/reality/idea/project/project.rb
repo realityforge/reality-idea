@@ -65,6 +65,10 @@ module Reality
           component_by_type(PluginDependencies)
         end
 
+        def javascript_settings
+          component_by_type(JavaScriptSettings)
+        end
+
         protected
 
         def pre_init
