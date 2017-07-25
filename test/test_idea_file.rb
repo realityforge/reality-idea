@@ -92,6 +92,7 @@ class Reality::Idea::TestIdeaFile < Reality::Idea::TestCase
     assert_equal '$MODULE_DIR$/src/main/java', element1.send(:resolve_path_from_base, "#{dir}/src/main/java", 'MODULE_DIR')
     assert_equal '$MODULE_DIR$', element1.send(:resolve_path_from_base, dir, 'MODULE_DIR')
     assert_equal '$MAVEN_REPOSITORY$/org/realityforge/lib/3.0/lib-3.0.jar', element1.send(:resolve_path_from_base, "#{MAVEN_REPOSITORY_DIR}/org/realityforge/lib/3.0/lib-3.0.jar", 'MODULE_DIR')
+    assert_equal '$USER_HOME$/.nodenv/versions/6.10.3/bin/node', element1.send(:resolve_path_from_base, File.expand_path('~/.nodenv/versions/6.10.3/bin/node'), 'MODULE_DIR')
   end
 
   def test_resolve_path_to_url
