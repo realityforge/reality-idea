@@ -66,6 +66,8 @@ module Reality
           @compiler_params = ''
           @node_interpreter = ''
           @ts_version_type = 'DETECT'
+          self.component_container.plugin_dependencies.add('JavaScript')
+          self.component_container.plugin_dependencies.add('NodeJS')
         end
 
         def build_component(xml)

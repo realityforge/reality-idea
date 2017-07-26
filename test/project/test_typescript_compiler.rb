@@ -18,9 +18,13 @@ class Reality::Idea::TestTypescriptCompiler < Reality::Idea::TestCase
   def test_basic_component_operation
     project = create_project
 
+    assert_equal([], project.plugin_dependencies.plugins)
+
     assert_component(project,
                      :typescript_compiler,
                      Reality::Idea::Model::TypeScriptCompiler)
+
+    assert_equal(%w(JavaScript NodeJS).sort, project.plugin_dependencies.plugins.sort)
 
     assert_equal('DETECT', project.typescript_compiler.ts_version_type)
     assert_equal('', project.typescript_compiler.compiler_params)
