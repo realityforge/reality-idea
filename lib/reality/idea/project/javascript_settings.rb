@@ -28,6 +28,24 @@ module Reality
           @language_level = language_level
         end
 
+        def prefer_strict=(prefer_strict)
+          self.component_container.properties.set('JavaScriptPreferStrict', (!!prefer_strict).to_s)
+        end
+
+        def prefer_strict?
+          prefer_strict = self.component_container.properties.properties['JavaScriptPreferStrict']
+          prefer_strict.nil? ? false : 'true' == prefer_strict
+        end
+
+        def only_type_based_completion=(only_type_based_completion)
+          self.component_container.properties.set('JavaScriptWeakerCompletionTypeGuess', (!only_type_based_completion).to_s)
+        end
+
+        def only_type_based_completion?
+          only_type_based_completion = self.component_container.properties.properties['JavaScriptWeakerCompletionTypeGuess']
+          only_type_based_completion.nil? ? true : 'false' == only_type_based_completion
+        end
+
         protected
 
         def component_init
