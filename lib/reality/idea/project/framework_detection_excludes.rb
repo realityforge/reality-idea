@@ -18,6 +18,8 @@ module Reality
       module FrameworkDetectionExcludes
         NAME = 'FrameworkDetectionExcludesConfiguration'
 
+        Project.define_component_type(:framework_detection_excludes, FrameworkDetectionExcludes)
+
         attr_accessor :paths
 
         protected

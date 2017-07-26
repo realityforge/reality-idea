@@ -18,6 +18,8 @@ module Reality
       module TypeScriptCompiler
         NAME = 'TypeScriptCompiler'
 
+        Project.define_component_type(:typescript_compiler, TypeScriptCompiler)
+
         # Defaults to empty string if no extra parameters required
         attr_accessor :compiler_params
 

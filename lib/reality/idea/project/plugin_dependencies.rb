@@ -18,6 +18,8 @@ module Reality
       module PluginDependencies
         NAME = 'ExternalDependencies'
 
+        Project.define_component_type(:plugin_dependencies, PluginDependencies)
+
         def plugins
           @plugins.dup
         end

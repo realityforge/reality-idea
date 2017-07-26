@@ -16,6 +16,9 @@ module Reality
   module Idea
     module Model
       module BaseComponentContainer
+        def self.included(base)
+          base.extend ClassMethods
+        end
 
         protected
 
@@ -27,6 +30,14 @@ module Reality
             component.send(:component_init) if component.respond_to?(:component_init, true)
           end
           component
+        end
+
+        module ClassMethods
+          def define_component_type(key, module_type)
+            define_method(key) do
+              component_by_type(module_type)
+            end
+          end
         end
       end
     end

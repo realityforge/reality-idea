@@ -18,6 +18,8 @@ module Reality
       module ProjectRootManager
         NAME = 'ProjectRootManager'
 
+        Project.define_component_type(:project_root_manager, ProjectRootManager)
+
         attr_reader :jdk_version
 
         def jdk_version=(jdk_version)

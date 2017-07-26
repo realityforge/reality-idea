@@ -110,6 +110,8 @@ module Reality
       module Tasks
         NAME = 'ProjectTasksOptions'
 
+        Project.define_component_type(:tasks, Tasks)
+
         attr_accessor :suppressed_tasks
         attr_accessor :tasks
 

@@ -43,6 +43,8 @@ module Reality
       module ModuleManager
         NAME = 'ProjectModuleManager'
 
+        Project.define_component_type(:module_manager, ModuleManager)
+
         attr_accessor :modules
 
         def add(path, options = {})

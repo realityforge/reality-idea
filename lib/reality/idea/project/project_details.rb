@@ -18,6 +18,8 @@ module Reality
       module ProjectDetails
         NAME = 'ProjectDetails'
 
+        Project.define_component_type(:details, ProjectDetails)
+
         protected
 
         def build_component(xml)

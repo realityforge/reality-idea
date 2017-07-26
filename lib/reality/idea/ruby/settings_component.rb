@@ -18,6 +18,8 @@ module Reality
       module RModuleSettingsStorageComponent
         NAME = 'RModuleSettingsStorage'
 
+        RubyModule.define_component_type(:settings, RModuleSettingsStorageComponent)
+
         attr_accessor :load_path
 
         protected

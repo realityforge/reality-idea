@@ -18,6 +18,8 @@ module Reality
       module JavaScriptSettings
         NAME = 'JavaScriptSettings'
 
+        Project.define_component_type(:javascript_settings, JavaScriptSettings)
+
         attr_reader :language_level
 
         def language_level=(language_level)

@@ -18,6 +18,8 @@ module Reality
       module VcsDirectoryMappings
         NAME = 'VcsDirectoryMappings'
 
+        Project.define_component_type(:vcs_directory_mappings, VcsDirectoryMappings)
+
         attr_accessor :mappings
 
         def add(vcs, path)

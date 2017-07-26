@@ -33,46 +33,6 @@ module Reality
           resolve_path_from_base(path, 'PROJECT_DIR')
         end
 
-        def framework_detection_excludes
-          component_by_type(FrameworkDetectionExcludes)
-        end
-
-        def tasks
-          component_by_type(Tasks)
-        end
-
-        def sql_dialect_mappings
-          component_by_type(SqlDialectMappings)
-        end
-
-        def vcs_directory_mappings
-          component_by_type(VcsDirectoryMappings)
-        end
-
-        def details
-          component_by_type(ProjectDetails)
-        end
-
-        def module_manager
-          component_by_type(ModuleManager)
-        end
-
-        def plugin_dependencies
-          component_by_type(PluginDependencies)
-        end
-
-        def javascript_settings
-          component_by_type(JavaScriptSettings)
-        end
-
-        def project_root_manager
-          component_by_type(ProjectRootManager)
-        end
-
-        def typescript_compiler
-          component_by_type(TypeScriptCompiler)
-        end
-
         protected
 
         def pre_init

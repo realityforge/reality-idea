@@ -18,6 +18,8 @@ module Reality
       module SqlDialectMappings
         NAME = 'SqlDialectMappings'
 
+        Project.define_component_type(:sql_dialect_mappings, SqlDialectMappings)
+
         attr_accessor :mappings
 
         def add(dialect, path)

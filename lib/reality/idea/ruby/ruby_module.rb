@@ -17,6 +17,7 @@ module Reality
     module Model
       class RubyModule
         include BaseModule
+        include BaseComponentContainer
 
         attr_writer :ruby_development_kit
 
@@ -24,10 +25,6 @@ module Reality
           @ruby_development_kit ||= calculate_ruby_version
           Reality::Idea.error("Unable to determine ruby_development_kit for module #{self.name}") unless @ruby_development_kit
           @ruby_development_kit
-        end
-
-        def settings
-          component_by_type(RModuleSettingsStorageComponent)
         end
 
         protected
