@@ -42,4 +42,21 @@ class Reality::Idea::TestJavaModule < Reality::Idea::TestCase
 </module>
 XML
   end
+
+  def test_to_xml_with_components
+    mod = Reality::Idea::Model::JavaModule.new(create_project, 'acal')
+
+    mod.facets.gwt
+
+    assert_xml_equal <<XML, mod.to_xml.to_s
+<module relativePaths="true" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet name="GWT" type="gwt">
+      <configuration>
+      </configuration>
+    </facet>
+  </component>
+</module>
+XML
+  end
 end
