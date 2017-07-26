@@ -27,8 +27,12 @@ class Reality::Idea::TestVcsDirectoryMappings < Reality::Idea::TestCase
     project.vcs_directory_mappings.add('FOO', project.project_directory)
     assert_equal({ 'FOO' => project.project_directory }, project.vcs_directory_mappings.mappings)
 
+    assert_equal([], project.plugin_dependencies.plugins)
+
     project.vcs_directory_mappings.add_git("#{project.project_directory}/dir1")
     assert_equal({ 'FOO' => project.project_directory, 'Git' => "#{project.project_directory}/dir1" }, project.vcs_directory_mappings.mappings)
+
+    assert_equal(%w(Git4Idea).sort, project.plugin_dependencies.plugins.sort)
 
     project.vcs_directory_mappings.add_svn("#{project.project_directory}/dir2")
     assert_equal({ 'FOO' => project.project_directory, 'Git' => "#{project.project_directory}/dir1", 'svn' => "#{project.project_directory}/dir2" }, project.vcs_directory_mappings.mappings)

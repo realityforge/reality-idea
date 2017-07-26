@@ -27,6 +27,7 @@ module Reality
         end
 
         def add_git(path)
+          self.component_container.plugin_dependencies.add('Git4Idea')
           add('Git', path)
         end
 
