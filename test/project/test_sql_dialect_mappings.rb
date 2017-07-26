@@ -18,9 +18,13 @@ class Reality::Idea::TestSqlDialectMappings < Reality::Idea::TestCase
   def test_basic_component_operation
     project = create_project
 
+    assert_equal([], project.plugin_dependencies.plugins)
+
     assert_component(project,
                      :sql_dialect_mappings,
                      Reality::Idea::Model::SqlDialectMappings)
+
+    assert_equal(%w(com.intellij.database).sort, project.plugin_dependencies.plugins.sort)
 
     assert_equal({}, project.sql_dialect_mappings.mappings)
 

@@ -38,6 +38,7 @@ module Reality
 
         def component_init
           @mappings = {}
+          self.component_container.plugin_dependencies.add('com.intellij.database')
         end
 
         def build_component(xml)
