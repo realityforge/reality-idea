@@ -20,7 +20,12 @@ class Reality::Idea::TestRubyModule < Reality::Idea::TestCase
     local_dir = self.random_local_dir
     project = Reality::Idea::Model::Project.new('acal')
     project.project_directory = local_dir
+
+    assert_equal([], project.plugin_dependencies.plugins)
+
     mod = Reality::Idea::Model::RubyModule.new(project, 'acal')
+
+    assert_equal(%w(org.jetbrains.plugins.ruby).sort, project.plugin_dependencies.plugins.sort)
 
     assert_equal 'acal', mod.idea_element_name
     assert_equal 'acal.iml', mod.local_filename

@@ -40,6 +40,7 @@ module Reality
         def pre_init
           base_module_pre_init
           @ruby_development_kit = nil
+          self.project.plugin_dependencies.add('org.jetbrains.plugins.ruby')
         end
 
         def calculate_ruby_version
