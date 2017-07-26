@@ -124,6 +124,7 @@ module Reality
         def component_init
           @suppressed_tasks = []
           @tasks = []
+          self.component_container.plugin_dependencies.add('com.intellij.plugins.watcher')
         end
 
         def build_component_attributes

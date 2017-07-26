@@ -18,9 +18,13 @@ class Reality::Idea::TestTasks < Reality::Idea::TestCase
   def test_basic_component_operation
     project = create_project
 
+    assert_equal([], project.plugin_dependencies.plugins)
+
     assert_component(project,
                      :tasks,
                      Reality::Idea::Model::Tasks)
+
+    assert_equal(%w(com.intellij.plugins.watcher).sort, project.plugin_dependencies.plugins.sort)
   end
 
   def test_build_xml
