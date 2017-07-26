@@ -16,10 +16,10 @@ module Reality
   module Idea
     module Model
       class Facet < Reality::BaseElement
-        def initialize(facet_manager, module_type, options = {})
+        def initialize(facet_manager, name, type, module_type, options = {})
           @facet_manager = facet_manager
-          @name = module_type.const_get(:NAME)
-          @type = module_type.const_get(:TYPE)
+          @name = name
+          @type = type
           self.singleton_class.include(module_type)
           self.facet_init if self.respond_to?(:facet_init, true)
           super(options)

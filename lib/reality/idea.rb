@@ -45,6 +45,7 @@ require 'reality/idea/project/typescript_compiler'
 require 'reality/idea/project/vcs_directory_mappings'
 
 require 'reality/idea/generic_components/facets/facet'
+require 'reality/idea/generic_components/facet_manager'
 require 'reality/idea/generic_components/facets/gwt'
 
 require 'reality/idea/ruby/settings_component'

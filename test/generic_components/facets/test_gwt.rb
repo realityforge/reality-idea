@@ -27,12 +27,23 @@ class Reality::Idea::TestGwtFacet < Reality::Idea::TestCase
     end
   end
 
-  def test_settings
+  def test_basic_operation
     project = create_project
 
     assert_equal [], project.plugin_dependencies.plugins
-    facet = Reality::Idea::Model::Facet.new(TestFacetMananger.new(project), Reality::Idea::Model::GwtFacet)
-    assert_equal %w(com.intellij.gwt), project.plugin_dependencies.plugins
+
+    facet = project.java_module('foo').facets.gwt
+
+    assert_true project.plugin_dependencies.plugins.include?('com.intellij.gwt')
+
+    assert_equal true, facet.is_a?(Reality::Idea::Model::GwtFacet)
+    assert_equal 'GWT', facet.name
+    assert_equal 'gwt', facet.type
+  end
+
+
+  def test_settings
+    facet = create_project.java_module('foo').facets.gwt
 
     assert_equal({}, facet.settings)
     facet.setting('myKey', 'myValue')
@@ -44,10 +55,7 @@ class Reality::Idea::TestGwtFacet < Reality::Idea::TestCase
   end
 
   def test_gwt_modules
-    project = create_project
-
-    facet = Reality::Idea::Model::Facet.new(TestFacetMananger.new(project), Reality::Idea::Model::GwtFacet)
-    assert_equal %w(com.intellij.gwt), project.plugin_dependencies.plugins
+    facet = create_project.java_module('foo').facets.gwt
 
     assert_equal({}, facet.gwt_modules)
     facet.gwt_module('com.biz.Foo', true)
@@ -57,10 +65,7 @@ class Reality::Idea::TestGwtFacet < Reality::Idea::TestCase
   end
 
   def test_build_xml
-    project = create_project
-
-    facet = Reality::Idea::Model::Facet.new(TestFacetMananger.new(project), Reality::Idea::Model::GwtFacet)
-    assert_equal %w(com.intellij.gwt), project.plugin_dependencies.plugins
+    facet = create_project.java_module('foo').facets.gwt
 
     facet.setting('myKey', 'myValue')
     facet.setting('myKey2', 'myValue2')

@@ -20,6 +20,8 @@ module Reality
         NAME = 'GWT'
         TYPE = 'gwt'
 
+        FacetManager.define_facet_type(JavaModuleComponent, TYPE, GwtFacet)
+
         def settings
           @settings.dup
         end
@@ -46,7 +48,7 @@ module Reality
             self.gwt_modules.each_pair do |k, v|
               xml.module :name => k, :enabled => v
             end
-          end
+          end unless self.gwt_modules.empty?
         end
 
         def facet_init
