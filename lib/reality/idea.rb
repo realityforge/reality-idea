@@ -29,6 +29,7 @@ require 'reality/idea/project/project_component'
 require 'reality/idea/project/project'
 require 'reality/idea/ruby/ruby_module_component'
 require 'reality/idea/ruby/ruby_module'
+require 'reality/idea/java/java_module_component'
 require 'reality/idea/java/java_module'
 
 require 'reality/idea/project/framework_detection_excludes'

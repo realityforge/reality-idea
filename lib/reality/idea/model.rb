@@ -26,6 +26,7 @@ module Reality
         r.model_element(:ruby_module, :project)
         r.model_element(:ruby_module_component, :ruby_module, :access_method => :components, :inverse_access_method => :component)
         r.model_element(:java_module, :project)
+        r.model_element(:java_module_component, :java_module, :access_method => :components, :inverse_access_method => :component)
       end
     end
   end
