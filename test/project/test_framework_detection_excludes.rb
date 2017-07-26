@@ -28,7 +28,6 @@ class Reality::Idea::TestFrameworkDetectionExcludes < Reality::Idea::TestCase
     project.framework_detection_excludes.paths << "#{project.project_directory}/target"
     project.framework_detection_excludes.paths << "#{project.project_directory}/tmp"
 
-
     assert_equal %W(#{project.project_directory}/artifacts #{project.project_directory}/reports #{project.project_directory}/target #{project.project_directory}/tmp),
                  project.framework_detection_excludes.paths
   end
