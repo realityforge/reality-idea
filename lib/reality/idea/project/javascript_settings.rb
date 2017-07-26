@@ -32,6 +32,8 @@ module Reality
 
         def component_init
           @language_level = 'ES6'
+          self.component_container.plugin_dependencies.add('JavaScript')
+          self.component_container.plugin_dependencies.add('NodeJS')
         end
 
         def build_component(xml)

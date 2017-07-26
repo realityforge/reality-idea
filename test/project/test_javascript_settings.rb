@@ -18,9 +18,13 @@ class Reality::Idea::TestJavascriptSettings < Reality::Idea::TestCase
   def test_basic_component_operation
     project = create_project
 
+    assert_equal([], project.plugin_dependencies.plugins)
+
     assert_component(project,
                      :javascript_settings,
                      Reality::Idea::Model::JavaScriptSettings)
+
+    assert_equal(%w(JavaScript NodeJS).sort, project.plugin_dependencies.plugins.sort)
 
     assert_equal 'ES6', project.javascript_settings.language_level
     project.javascript_settings.language_level = 'JSX'
