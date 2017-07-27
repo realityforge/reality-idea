@@ -6,6 +6,9 @@ An ruby model to represent and generate intellij idea project files.
 
 ## TODO
 
+* Add `artifacts` project component with artifacts such as: `exploded_ejb`, `exploded_ear`, `exploded_war`, `jar`
+* Add `configurations` project component with configurations such as: `glassfish`, `remote_glassfish`, `default_testng`, `gwt`, `ruby_script`, `java`
+* Add `datasources` project component.
 * Add CLI action that generates files from model.
 * Add "integration" tests that given a model generates the files.
 * Add hook to facets so they can determine if they generate.
