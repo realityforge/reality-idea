@@ -15,18 +15,6 @@
 require File.expand_path('../../../helper', __FILE__)
 
 class Reality::Idea::TestGwtFacet < Reality::Idea::TestCase
-  class TestFacetMananger
-    def initialize(project)
-      @project = project
-    end
-
-    attr_reader :project
-
-    def component_container
-      self
-    end
-  end
-
   def test_basic_operation
     project = create_project
 
