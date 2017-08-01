@@ -55,7 +55,7 @@ module Reality
           @facets = {}
           facet_types = FacetManager.facet_types_by_container_type(self.class)
           facet_types.each_pair do |key, facet_type|
-            self.singleton_class.send(:define_method, key) do
+            self.singleton_class.send(:define_method, key.to_s.downcase) do
               facet_by_type(facet_type)
             end
           end
