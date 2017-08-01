@@ -32,6 +32,8 @@ require 'reality/idea/ruby/ruby_module'
 require 'reality/idea/java/java_module_component'
 require 'reality/idea/java/java_module'
 
+require 'reality/idea/project/artifacts'
+require 'reality/idea/project/artifacts/jar'
 require 'reality/idea/project/framework_detection_excludes'
 require 'reality/idea/project/javascript_library_mappings'
 require 'reality/idea/project/javascript_settings'
