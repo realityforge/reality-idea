@@ -59,8 +59,8 @@ module Reality
 
         def build_component(xml)
           xml.modules do
-            self.modules.each do |task|
-              task.build_xml(xml)
+            self.modules.each do |m|
+              m.build_xml(xml)
             end
           end
         end
