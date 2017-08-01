@@ -53,6 +53,17 @@ class Reality::Idea::TestBaseModule < Reality::Idea::TestCase
     end
   end
 
+  def test_module_group
+    element = TestElement.new(create_project, 'core')
+
+    assert_equal nil, element.module_group
+
+    module_group = random_string
+    element.module_group = module_group
+
+    assert_equal module_group, element.module_group
+  end
+
   def test_module_directory
     project = create_project
 

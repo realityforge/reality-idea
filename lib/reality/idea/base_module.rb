@@ -18,6 +18,8 @@ module Reality
       module BaseModule
         include IdeaFile
 
+        attr_accessor :module_group
+
         attr_writer :module_directory
 
         def module_directory
@@ -64,6 +66,7 @@ module Reality
 
         def base_module_pre_init
           @module_directory = nil
+          @module_group = nil
           idea_file_pre_init
         end
       end
