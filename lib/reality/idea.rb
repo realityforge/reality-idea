@@ -50,4 +50,6 @@ require 'reality/idea/generic_components/facets/facet'
 require 'reality/idea/generic_components/facet_manager'
 require 'reality/idea/generic_components/facets/gwt'
 
+require 'reality/idea/generic_components/root_manager'
+
 require 'reality/idea/ruby/settings_component'
