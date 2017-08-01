@@ -52,6 +52,7 @@ require 'reality/idea/generic_components/facets/gwt'
 require 'reality/idea/generic_components/facets/jpa'
 require 'reality/idea/generic_components/facets/ejb'
 require 'reality/idea/generic_components/facets/jruby'
+require 'reality/idea/generic_components/facets/web'
 
 require 'reality/idea/generic_components/root_manager'
 
