@@ -57,4 +57,24 @@ class Reality::Idea::TestModuleManager < Reality::Idea::TestCase
 </component>
 XML
   end
+
+  def test_build_xml_with_model_modules
+    project = create_project
+
+    project.module_manager.add("#{project.project_directory}/core/core.iml")
+    project.module_manager.add("#{project.project_directory}/model/model.iml", :group => 'Backend')
+    project.ruby_module('api', :module_group => 'MyGroup')
+    project.java_module('server')
+
+    assert_xml_equal <<XML, component_to_xml(project.module_manager)
+<component name="ProjectModuleManager">
+  <modules>
+    <module filepath="$PROJECT_DIR$/server/server.iml" fileurl="file://$PROJECT_DIR$/server/server.iml"/>
+    <module filepath="$PROJECT_DIR$/api/api.iml" fileurl="file://$PROJECT_DIR$/api/api.iml" group="MyGroup"/>
+    <module filepath="$PROJECT_DIR$/core/core.iml" fileurl="file://$PROJECT_DIR$/core/core.iml"/>
+    <module filepath="$PROJECT_DIR$/model/model.iml" fileurl="file://$PROJECT_DIR$/model/model.iml" group="Backend"/>
+  </modules>
+</component>
+XML
+  end
 end

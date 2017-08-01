@@ -34,7 +34,7 @@ module Reality
               :fileurl => component.resolve_path_to_url(self.path),
               :filepath => component.resolve_path(self.path)
             }
-          attributes[:group] = self.group unless self.group == ''
+          attributes[:group] = self.group unless self.group.to_s == ''
 
           xml.module attributes
         end
@@ -59,6 +59,10 @@ module Reality
 
         def build_component(xml)
           xml.modules do
+            modules = self.component_container.java_modules + self.component_container.ruby_modules
+            modules.each do |m|
+              ModuleDef.new(self, m.filename, :group => m.module_group).build_xml(xml)
+            end
             self.modules.each do |m|
               m.build_xml(xml)
             end
