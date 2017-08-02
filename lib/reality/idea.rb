@@ -34,6 +34,7 @@ require 'reality/idea/java/java_module'
 
 require 'reality/idea/project/artifacts'
 require 'reality/idea/project/artifacts/jar'
+require 'reality/idea/project/artifacts/exploded_war'
 require 'reality/idea/project/framework_detection_excludes'
 require 'reality/idea/project/javascript_library_mappings'
 require 'reality/idea/project/javascript_settings'

@@ -76,7 +76,7 @@ module Reality
           @artifacts = []
           Artifacts.artifact_types.each_pair do |key, artifact_type|
             default_options = {}
-            self.singleton_class.send(:define_method, key.to_s.downcase) do |name, options = default_options|
+            self.singleton_class.send(:define_method, key.to_s.downcase.gsub('-','_')) do |name, options = default_options|
               artifact = Artifact.new(self, name, artifact_type, options)
               @artifacts << artifact
               artifact
