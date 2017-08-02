@@ -81,7 +81,8 @@ module Reality
           @configurations = []
           Configurations.configuration_types.each_pair do |key, configuration_type|
             default_options = {}
-            self.singleton_class.send(:define_method, key.to_s.downcase.gsub('-','_')) do |name, options = default_options|
+            method_name = key.to_s.downcase.gsub('-', '_')
+            self.singleton_class.send(:define_method, method_name) do |name, options = default_options|
               configuration = Configuration.new(self, name, configuration_type, options)
               @configurations << configuration
               configuration
