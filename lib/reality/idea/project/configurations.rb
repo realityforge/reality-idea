@@ -41,8 +41,12 @@ module Reality
         end
 
         def build_xml(xml)
-          attributes = {:type => self.type, :name => self.name, :factoryName => self.factory_name}
-          attributes[:default] = true if default?
+          attributes = { :type => self.type, :factoryName => self.factory_name }
+          if self.default?
+            attributes[:default] = true
+          else
+            attributes[:name] = self.name
+          end
           attributes.merge!(self.additional_configuration_attributes) if self.respond_to?(:additional_configuration_attributes, true)
           xml.configuration(attributes) do
             build_configuration_xml(xml)
@@ -84,6 +88,11 @@ module Reality
             method_name = key.to_s.downcase.gsub('-', '_')
             self.singleton_class.send(:define_method, method_name) do |name, options = default_options|
               configuration = Configuration.new(self, name, configuration_type, options)
+              @configurations << configuration
+              configuration
+            end
+            self.singleton_class.send(:define_method, "default_#{method_name}") do |options = default_options|
+              configuration = Configuration.new(self, nil, configuration_type, options.merge(:default => true))
               @configurations << configuration
               configuration
             end

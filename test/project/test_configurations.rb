@@ -60,6 +60,32 @@ XML
 XML
   end
 
+  def test_build_xml_single_default_configuration
+    project = create_project
+
+    project.configurations.default_gwt
+
+    assert_xml_equal <<XML, component_to_xml(project.configurations)
+<component name="ProjectRunConfigurationManager">
+  <configuration default="true" factoryName="GWT Configuration" singleton="true" type="GWT.ConfigurationType">
+    <module name=""/>
+    <option name="VM_PARAMETERS" value="-Xmx512m"/>
+    <option name="START_JAVASCRIPT_DEBUGGER" value="false"/>
+    <option name="USE_SUPER_DEV_MODE" value="true"/>
+    <RunnerSettings RunnerId="Debug">
+      <option name="DEBUG_PORT" value=""/>
+      <option name="TRANSPORT" value="0"/>
+      <option name="LOCAL" value="true"/>
+    </RunnerSettings>
+    <RunnerSettings RunnerId="Run"/>
+    <ConfigurationWrapper RunnerId="Run"/>
+    <ConfigurationWrapper RunnerId="Debug"/>
+    <method/>
+  </configuration>
+</component>
+XML
+  end
+
   def test_build_xml_multiple_configurations
     project = create_project
 
