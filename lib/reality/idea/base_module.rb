@@ -35,6 +35,7 @@ module Reality
         end
 
         def to_xml
+          pre_build_xml if respond_to?(:pre_build_xml, true)
           Reality::Idea::Util.build_xml do |xml|
             xml.tag!(:module, additional_module_attributes.merge(:type => module_type)) do
               self.components.sort_by {|component| component.name}.each do |component|

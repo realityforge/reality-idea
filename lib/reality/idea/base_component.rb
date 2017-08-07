@@ -18,6 +18,7 @@ module Reality
       # The BaseComponent should be mixed into all elements that represent IDEA components (Project or Module)
       module BaseComponent
         def build_xml(xml)
+          pre_build_xml if respond_to?(:pre_build_xml, true)
           create_component(xml, self.name) do
             build_component(xml)
           end
