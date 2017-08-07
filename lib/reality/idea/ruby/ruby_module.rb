@@ -27,6 +27,12 @@ module Reality
           @ruby_development_kit
         end
 
+        attr_writer :gemfile
+
+        def gemfile
+          @gemfile || "#{self.module_directory}/Gemfile"
+        end
+
         protected
 
         def module_type
@@ -34,13 +40,28 @@ module Reality
         end
 
         def additional_module_attributes
-          {:version => '4'}
+          { :version => '4' }
         end
 
         def pre_init
           base_module_pre_init
           @ruby_development_kit = nil
+          @gemfile = nil
           self.project.plugin_dependencies.add('org.jetbrains.plugins.ruby')
+        end
+
+        def post_init
+          scan_gemfile_lock!
+        end
+
+        def scan_gemfile_lock!
+          lock_filename = File.expand_path("#{self.gemfile}.lock")
+          if File.exist?(lock_filename)
+            lock_file = Bundler::LockfileParser.new(IO.read(lock_filename))
+            lock_file.specs.each do |spec|
+              self.root_manager.gem_order_entry(spec.name, spec.version)
+            end
+          end
         end
 
         def calculate_ruby_version
