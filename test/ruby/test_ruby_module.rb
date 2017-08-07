@@ -17,9 +17,7 @@ require File.expand_path('../../helper', __FILE__)
 class Reality::Idea::TestRubyModule < Reality::Idea::TestCase
 
   def test_idea_element_name
-    local_dir = self.random_local_dir
-    project = Reality::Idea::Model::Project.new('acal')
-    project.project_directory = local_dir
+    project = create_project
 
     assert_equal([], project.plugin_dependencies.plugins)
 
@@ -29,23 +27,22 @@ class Reality::Idea::TestRubyModule < Reality::Idea::TestCase
 
     assert_equal 'acal', mod.idea_element_name
     assert_equal 'acal.iml', mod.local_filename
-    assert_equal "#{local_dir}/acal/acal.iml", mod.filename
+    assert_equal "#{project.project_directory}/acal/acal.iml", mod.filename
 
-    mod.module_directory = local_dir
+    mod.module_directory = project.project_directory
 
-    assert_equal "#{local_dir}/acal.iml", mod.filename
+    assert_equal "#{project.project_directory}/acal.iml", mod.filename
   end
 
   def test_try_load_ruby_version
-    local_dir = self.random_local_dir
-    project = Reality::Idea::Model::Project.new('acal')
-    project.project_directory = local_dir
+    project = create_project
+
     mod = Reality::Idea::Model::RubyModule.new(project, 'acal')
 
     assert_nil mod.send(:try_load_ruby_version, mod.module_directory)
 
-    FileUtils.mkdir_p local_dir
-    IO.write("#{local_dir}/.ruby-version", "2.1.3\n")
+    FileUtils.mkdir_p project.project_directory
+    IO.write("#{project.project_directory}/.ruby-version", "2.1.3\n")
     assert_nil mod.send(:try_load_ruby_version, mod.module_directory)
 
     FileUtils.mkdir_p mod.module_directory
@@ -54,15 +51,14 @@ class Reality::Idea::TestRubyModule < Reality::Idea::TestCase
   end
 
   def test_calculate_ruby_version
-    local_dir = self.random_local_dir
-    project = Reality::Idea::Model::Project.new('acal')
-    project.project_directory = local_dir
+    project = create_project
+
     mod = Reality::Idea::Model::RubyModule.new(project, 'acal')
 
     assert_nil mod.send(:calculate_ruby_version)
 
-    FileUtils.mkdir_p local_dir
-    IO.write("#{local_dir}/.ruby-version", "2.1.3\n")
+    FileUtils.mkdir_p project.project_directory
+    IO.write("#{project.project_directory}/.ruby-version", "2.1.3\n")
     assert_equal '2.1.3', mod.send(:calculate_ruby_version)
 
     FileUtils.mkdir_p mod.module_directory
@@ -71,17 +67,16 @@ class Reality::Idea::TestRubyModule < Reality::Idea::TestCase
   end
 
   def test_ruby_development_kit
-    local_dir = self.random_local_dir
-    project = Reality::Idea::Model::Project.new('acal')
-    project.project_directory = local_dir
+    project = create_project
+
     mod = Reality::Idea::Model::RubyModule.new(project, 'acal')
 
     assert_idea_error('Unable to determine ruby_development_kit for module acal') do
       mod.ruby_development_kit
     end
 
-    FileUtils.mkdir_p local_dir
-    IO.write("#{local_dir}/.ruby-version", "2.1.3\n")
+    FileUtils.mkdir_p project.project_directory
+    IO.write("#{project.project_directory}/.ruby-version", "2.1.3\n")
     assert_equal '2.1.3', mod.ruby_development_kit
 
     mod.ruby_development_kit = nil
