@@ -51,11 +51,18 @@ module Reality
           base_module_pre_init
           @ruby_development_kit = nil
           @gemfile = nil
+          @pre_build_xml_hook_run = false
           self.project.plugin_dependencies.add('org.jetbrains.plugins.ruby')
         end
 
-        def post_init
-          scan_gemfile_lock!
+        def pre_build_xml
+          unless @pre_build_xml_hook_run
+            ruby_development_kit = safe_ruby_development_kit
+            self.root_manager.ruby_sdk_order_entry(ruby_development_kit) if ruby_development_kit
+            self.root_manager.source_folder_order_entry
+            scan_gemfile_lock!
+            @pre_build_xml_hook_run = true
+          end
         end
 
         def scan_gemfile_lock!

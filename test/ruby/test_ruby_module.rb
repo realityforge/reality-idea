@@ -170,11 +170,15 @@ CONTENT
     assert_equal '2.42', mod.ruby_development_kit
   end
 
-  def test_to_xml_with_no_components
+  def test_to_xml_with_no_explicit_components
     mod = Reality::Idea::Model::RubyModule.new(create_project, 'acal')
 
     assert_xml_equal <<XML, mod.to_xml.to_s
 <module type="RUBY_MODULE" version="4">
+  <component inherit-compiler-output="true" name="NewModuleRootManager">
+    <exclude-output/>
+    <orderEntry forTests="false" type="sourceFolder"/>
+  </component>
 </module>
 XML
   end
@@ -187,6 +191,10 @@ XML
 
     assert_xml_equal <<XML, mod.to_xml.to_s
 <module type="RUBY_MODULE" version="4">
+  <component inherit-compiler-output="true" name="NewModuleRootManager">
+    <exclude-output/>
+    <orderEntry forTests="false" type="sourceFolder"/>
+  </component>
   <component name="RModuleSettingsStorage">
     <LOAD_PATH number="2" string0="$MODULE_DIR$/lib" string1="$MODULE_DIR$/test"/>
     <I18N_FOLDERS number="0"/>
@@ -258,6 +266,8 @@ CONTENT
 <module type="RUBY_MODULE" version="4">
   <component inherit-compiler-output="true" name="NewModuleRootManager">
     <exclude-output/>
+    <orderEntry jdkName="2.3" jdkType="RUBY_SDK" type="jdk"/>
+    <orderEntry forTests="false" type="sourceFolder"/>
     <orderEntry level="application" name="builder (v3.2.2, rbenv: 2.3) [gem]" scope="PROVIDED" type="library"/>
     <orderEntry level="application" name="mini_portile2 (v2.1.0, rbenv: 2.3) [gem]" scope="PROVIDED" type="library"/>
     <orderEntry level="application" name="minitest (v5.9.1, rbenv: 2.3) [gem]" scope="PROVIDED" type="library"/>
