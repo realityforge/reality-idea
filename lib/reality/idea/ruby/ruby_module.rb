@@ -22,9 +22,9 @@ module Reality
         attr_writer :ruby_development_kit
 
         def ruby_development_kit
-          @ruby_development_kit ||= calculate_ruby_version
-          Reality::Idea.error("Unable to determine ruby_development_kit for module #{self.name}") unless @ruby_development_kit
-          @ruby_development_kit
+          ruby_development_kit = safe_ruby_development_kit
+          Reality::Idea.error("Unable to determine ruby_development_kit for module #{self.name}") unless ruby_development_kit
+          ruby_development_kit
         end
 
         attr_writer :gemfile
@@ -34,6 +34,10 @@ module Reality
         end
 
         protected
+
+        def safe_ruby_development_kit
+          @ruby_development_kit ||= calculate_ruby_version
+        end
 
         def module_type
           'RUBY_MODULE'
