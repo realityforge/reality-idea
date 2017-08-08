@@ -1,0 +1,40 @@
+<module relativePaths="true" type="JAVA_MODULE" version="4">
+  <component inherit-compiler-output="false" name="NewModuleRootManager">
+    <output url="file://$MODULE_DIR$/target/classes"/>
+    <output-test url="file://$MODULE_DIR$/target/test-classes"/>
+    <exclude-output/>
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder isTestSource="false" url="file://$MODULE_DIR$/src/main/java"/>
+      <sourceFolder type="java-resource" url="file://$MODULE_DIR$/src/main/resources"/>
+      <sourceFolder isTestSource="true" url="file://$MODULE_DIR$/src/test/java"/>
+      <sourceFolder type="java-test-resource" url="file://$MODULE_DIR$/src/test/resources"/>
+      <sourceFolder generated="true" isTestSource="false" url="file://$MODULE_DIR$/generated/src/main/java"/>
+      <sourceFolder generated="true" type="java-resource" url="file://$MODULE_DIR$/generated/src/main/resources"/>
+      <sourceFolder generated="true" isTestSource="true" url="file://$MODULE_DIR$/generated/src/test/java"/>
+      <sourceFolder generated="true" type="java-test-resource" url="file://$MODULE_DIR$/generated/src/test/resources"/>
+      <excludeFolder url="file://$MODULE_DIR$/tmp"/>
+    </content>
+    <orderEntry jdkName="1.8" jdkType="JavaSDK" type="jdk"/>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/foo.jar!/"/>
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$MODULE_DIR$/lib/foo-javadocs.jar!/"/>
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/lib/foo-sources.jar!/"/>
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/classes!/"/>
+        </CLASSES>
+      </library>
+    </orderEntry>
+    <orderEntry module-name="annotations" scope="PROVIDED" type="module"/>
+  </component>
+</module>

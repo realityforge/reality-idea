@@ -1,0 +1,21 @@
+<module relativePaths="true" type="JAVA_MODULE" version="4">
+  <component inherit-compiler-output="false" name="NewModuleRootManager">
+    <output url="file://$MODULE_DIR$/target/classes"/>
+    <output-test url="file://$MODULE_DIR$/target/test-classes"/>
+    <exclude-output/>
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder isTestSource="false" url="file://$MODULE_DIR$/src/main/java"/>
+      <sourceFolder type="java-resource" url="file://$MODULE_DIR$/src/main/resources"/>
+      <sourceFolder isTestSource="true" url="file://$MODULE_DIR$/src/test/java"/>
+      <sourceFolder type="java-test-resource" url="file://$MODULE_DIR$/src/test/resources"/>
+    </content>
+    <orderEntry jdkName="1.8" jdkType="JavaSDK" type="jdk"/>
+    <orderEntry exported="" scope="PROVIDED" type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/org/realityforge/annotations.jar!/"/>
+        </CLASSES>
+      </library>
+    </orderEntry>
+  </component>
+</module>
