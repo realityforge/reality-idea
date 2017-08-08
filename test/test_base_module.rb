@@ -80,6 +80,17 @@ class Reality::Idea::TestBaseModule < Reality::Idea::TestCase
     assert_equal "#{local_dir}/core.iml", element.filename
   end
 
+  def test_module_directory_default_module
+    project = create_project
+
+    element = TestElement.new(project, project.name)
+
+    assert_equal project.name.to_s, element.idea_element_name
+    assert_equal "#{project.name}.iml", element.local_filename
+    assert_equal "#{project.project_directory}/#{project.name}.iml", element.filename
+    assert_equal project.project_directory, element.module_directory
+  end
+
   def test_resolve_path
     project = create_project
     mod = TestElement.new(project, 'core')

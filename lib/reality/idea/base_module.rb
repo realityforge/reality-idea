@@ -23,7 +23,7 @@ module Reality
         attr_writer :module_directory
 
         def module_directory
-          @module_directory || "#{self.project.project_directory}/#{self.name}"
+          @module_directory || (self.project.name.to_s == self.name.to_s ? self.project.project_directory : "#{self.project.project_directory}/#{self.name}")
         end
 
         def extension
