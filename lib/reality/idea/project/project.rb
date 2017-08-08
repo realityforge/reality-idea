@@ -33,6 +33,16 @@ module Reality
           resolve_path_from_base(path, 'PROJECT_DIR')
         end
 
+        def to_xml
+          "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + Reality::Idea::Util.build_xml do |xml|
+            xml.project(:version => 4) do
+              self.components.sort_by {|component| component.name}.each do |component|
+                component.build_xml(xml)
+              end
+            end
+          end.to_s
+        end
+
         protected
 
         def pre_init
