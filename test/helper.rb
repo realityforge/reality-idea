@@ -123,4 +123,14 @@ class Reality::Idea::TestCase < Minitest::Test
     project_directory = options[:project_directory] || self.random_local_dir
     Reality::Idea::Model::Project.new(name, :project_directory => project_directory, &block)
   end
+
+  def assert_no_diff(path1, path2)
+    run_command("diff -r -U 3 #{path1} #{path2}")
+  end
+
+  def run_command(command)
+    output = `#{command}`
+    raise "Error executing command: #{command}\nOutput: #{output}" unless $?.success?
+    output
+  end
 end
