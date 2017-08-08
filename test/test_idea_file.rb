@@ -35,6 +35,10 @@ class Reality::Idea::TestIdeaFile < Reality::Idea::TestCase
       resolve_path_from_base(path, 'MODULE_DIR')
     end
 
+    def to_xml
+      '<>'
+    end
+
     protected
 
     def _base_directory
@@ -99,5 +103,12 @@ class Reality::Idea::TestIdeaFile < Reality::Idea::TestCase
     dir = self.random_local_dir
     element1 = TestElement.new('core', dir)
     assert_equal 'file://$MODULE_DIR$/src/main/java', element1.resolve_path_to_url("#{dir}/src/main/java")
+  end
+
+  def test_save
+    dir = self.random_local_dir
+    element1 = TestElement.new('core', dir)
+    element1.save
+    assert_equal '<>', IO.read(element1.filename)
   end
 end

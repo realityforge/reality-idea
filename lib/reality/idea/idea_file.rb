@@ -62,6 +62,15 @@ module Reality
           Reality::Idea::Util.relative_path(path, self._base_directory)
         end
 
+        def to_xml
+          Reality::Idea.error("IdeaFile #{self.name} has not overridden 'to_xml' method")
+        end
+
+        def save(filename = self.filename)
+          FileUtils.mkdir_p(File.dirname(filename))
+          IO.write(filename, to_xml.to_s)
+        end
+
         protected
 
         def _base_directory
