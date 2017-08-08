@@ -173,7 +173,7 @@ CONTENT
   def test_to_xml_with_no_explicit_components
     mod = Reality::Idea::Model::RubyModule.new(create_project, 'acal')
 
-    assert_xml_equal <<XML, mod.to_xml.to_s
+    assert_xml_equal <<XML, mod.to_xml
 <module type="RUBY_MODULE" version="4">
   <component inherit-compiler-output="true" name="NewModuleRootManager">
     <exclude-output/>
@@ -189,7 +189,7 @@ XML
     mod.settings.load_path << "#{mod.module_directory}/lib"
     mod.settings.load_path << "#{mod.module_directory}/test"
 
-    assert_xml_equal <<XML, mod.to_xml.to_s
+    assert_xml_equal <<XML, mod.to_xml
 <module type="RUBY_MODULE" version="4">
   <component inherit-compiler-output="true" name="NewModuleRootManager">
     <exclude-output/>
@@ -262,7 +262,7 @@ CONTENT
     mod.settings.load_path << "#{mod.module_directory}/lib"
     mod.settings.load_path << "#{mod.module_directory}/test"
 
-    assert_xml_equal <<XML, mod.to_xml.to_s
+    assert_xml_equal <<XML, mod.to_xml
 <module type="RUBY_MODULE" version="4">
   <component inherit-compiler-output="true" name="NewModuleRootManager">
     <exclude-output/>

@@ -90,7 +90,7 @@ class Reality::Idea::TestBaseModule < Reality::Idea::TestCase
   def test_to_xml_with_no_components
     mod = TestElement.new(create_project, 'core')
 
-    assert_xml_equal <<XML, mod.to_xml.to_s
+    assert_xml_equal <<XML, mod.to_xml
 <module type="TEST_MODULE">
 </module>
 XML
@@ -101,7 +101,7 @@ XML
 
     mod.additional_module_attributes['version'] = 4
 
-    assert_xml_equal <<XML, mod.to_xml.to_s
+    assert_xml_equal <<XML, mod.to_xml
 <module type="TEST_MODULE" version="4">
 </module>
 XML
@@ -113,7 +113,7 @@ XML
     mod.components << TestComponent.new('comp2')
     mod.components << TestComponent.new('comp1')
 
-    assert_xml_equal <<XML, mod.to_xml.to_s
+    assert_xml_equal <<XML, mod.to_xml
 <module type="TEST_MODULE">
   <component name="comp1"/>
   <component name="comp2"/>

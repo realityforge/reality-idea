@@ -37,7 +37,7 @@ class Reality::Idea::TestJavaModule < Reality::Idea::TestCase
   def test_to_xml_with_no_components
     mod = Reality::Idea::Model::JavaModule.new(create_project, 'acal')
 
-    assert_xml_equal <<XML, mod.to_xml.to_s
+    assert_xml_equal <<XML, mod.to_xml
 <module type="JAVA_MODULE" relativePaths="true" version="4">
 </module>
 XML
@@ -48,7 +48,7 @@ XML
 
     mod.facets.gwt
 
-    assert_xml_equal <<XML, mod.to_xml.to_s
+    assert_xml_equal <<XML, mod.to_xml
 <module relativePaths="true" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet name="GWT" type="gwt">

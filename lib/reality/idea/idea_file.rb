@@ -68,7 +68,7 @@ module Reality
 
         def save(filename = self.filename)
           FileUtils.mkdir_p(File.dirname(filename))
-          IO.write(filename, to_xml.to_s)
+          IO.write(filename, to_xml)
         end
 
         protected

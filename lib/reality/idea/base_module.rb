@@ -42,7 +42,7 @@ module Reality
                 component.build_xml(xml)
               end
             end
-          end
+          end.to_s
         end
 
         protected
