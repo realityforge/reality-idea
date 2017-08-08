@@ -14,6 +14,7 @@
 
 $:.unshift File.expand_path('../../lib', __FILE__)
 
+require 'bundler/setup'
 require 'securerandom'
 require 'minitest/autorun'
 require 'test/unit/assertions'

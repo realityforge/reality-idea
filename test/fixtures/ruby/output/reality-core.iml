@@ -1,0 +1,16 @@
+<module type="RUBY_MODULE" version="4">
+  <component inherit-compiler-output="true" name="NewModuleRootManager">
+    <exclude-output/>
+    <orderEntry jdkName="2.3.1" jdkType="RUBY_SDK" type="jdk"/>
+    <orderEntry forTests="false" type="sourceFolder"/>
+    <orderEntry level="application" name="minitest (v5.9.1, rbenv: 2.3.1) [gem]" scope="PROVIDED" type="library"/>
+    <orderEntry level="application" name="power_assert (v1.0.2, rbenv: 2.3.1) [gem]" scope="PROVIDED" type="library"/>
+    <orderEntry level="application" name="rake (v0.9.2.2, rbenv: 2.3.1) [gem]" scope="PROVIDED" type="library"/>
+    <orderEntry level="application" name="reality-core (v1.8.0, rbenv: 2.3.1) [gem]" scope="PROVIDED" type="library"/>
+    <orderEntry level="application" name="test-unit (v3.1.5, rbenv: 2.3.1) [gem]" scope="PROVIDED" type="library"/>
+  </component>
+  <component name="RModuleSettingsStorage">
+    <LOAD_PATH number="2" string0="$MODULE_DIR$/lib" string1="$MODULE_DIR$/test"/>
+    <I18N_FOLDERS number="0"/>
+  </component>
+</module>

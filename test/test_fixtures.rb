@@ -15,7 +15,7 @@
 require File.expand_path('../helper', __FILE__)
 
 class Reality::Idea::TestFixtures < Reality::Idea::TestCase
-  FIXTURE_DIR = "#{File.dirname(__FILE__)}/fixtures"
+  FIXTURE_DIR = File.expand_path("#{File.dirname(__FILE__)}/fixtures")
 
   Dir["#{FIXTURE_DIR}/*"].select {|f| File.directory?(f)}.each do |base_fixture_dir|
     define_method("test_fixture_#{File.basename(base_fixture_dir)}") do
