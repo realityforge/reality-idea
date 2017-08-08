@@ -42,6 +42,6 @@ class Reality::Idea::TestFixtures < Reality::Idea::TestCase
 
     FileUtils.rm_f "#{output_directory}/projects.rb"
 
-    assert_no_diff(output_directory, "#{base_fixture_dir}/output")
+    assert_no_diff("#{base_fixture_dir}/output", output_directory)
   end
 end
