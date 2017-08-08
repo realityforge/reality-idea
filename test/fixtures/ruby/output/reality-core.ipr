@@ -3,4 +3,9 @@
   <component name="ExternalDependencies">
     <plugin id="org.jetbrains.plugins.ruby"/>
   </component>
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/reality-core.iml" filepath="$PROJECT_DIR$/reality-core.iml"/>
+    </modules>
+  </component>
 </project>

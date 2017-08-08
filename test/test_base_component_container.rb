@@ -59,7 +59,7 @@ class Reality::Idea::TestBaseComponentContainer < Reality::Idea::TestCase
   end
 
   def test_component_by_type
-    container = create_project
+    container = Reality::Idea::Model::JavaModule.new(create_project, 'acal')
 
     assert_equal container.components.size, 0
 

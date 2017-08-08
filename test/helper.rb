@@ -81,12 +81,12 @@ class Reality::Idea::TestCase < Minitest::Test
     end
   end
 
-  def assert_component(component_container, key, expected_type)
+  def assert_component(component_container, key, expected_type, options = {})
     initial_size = component_container.components.size
     component = component_container.send(key)
     assert_equal true, component.singleton_class.include?(expected_type)
     post_size = component_container.components.size
-    assert_true post_size >= initial_size + 1
+    assert_true post_size >= initial_size + 1 unless options[:precreated]
     assert_equal component, component_container.send(key)
     assert_equal post_size, component_container.components.size
 

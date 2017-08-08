@@ -20,7 +20,8 @@ class Reality::Idea::TestModuleManager < Reality::Idea::TestCase
 
     assert_component(project,
                      :module_manager,
-                     Reality::Idea::Model::ModuleManager)
+                     Reality::Idea::Model::ModuleManager,
+                     :precreated => true)
 
     assert_equal [], project.module_manager.modules
     project.module_manager.add("#{project.project_directory}/core/core.iml")

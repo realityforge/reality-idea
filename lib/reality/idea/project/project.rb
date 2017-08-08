@@ -50,6 +50,11 @@ module Reality
           @project_directory = nil
         end
 
+        def post_init
+          # Force the creation of module manager component at the very least
+          self.module_manager
+        end
+
         def _base_directory
           self.project_directory
         end
