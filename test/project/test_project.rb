@@ -206,6 +206,44 @@ XML
 XML
   end
 
+  def test_to_sorted_document
+    local_dir = self.random_local_dir
+    project = Reality::Idea::Model::Project.new('acal', :project_directory => local_dir)
+
+    assert_equal 0, project.component_files.size
+
+    FileUtils.mkdir_p local_dir
+    IO.write("#{local_dir}/mycomponent1.xml", <<XML)
+<component name="Z">
+</component>
+XML
+    IO.write("#{local_dir}/mycomponent2.xml", <<XML)
+<component name="Y">
+</component>
+XML
+    IO.write("#{local_dir}/mycomponent3.xml", <<XML)
+<component name="A">
+</component>
+XML
+
+    project.component_file("#{local_dir}/mycomponent1.xml")
+    project.component_file("#{local_dir}/mycomponent2.xml")
+    project.component_file("#{local_dir}/mycomponent3.xml")
+
+    assert_equal 3, project.component_files.size
+
+    assert_xml_equal <<XML, project.to_xml
+<project version="4">
+  <component name="A"> </component>
+  <component name="ProjectModuleManager">
+    <modules> </modules>
+  </component>
+  <component name="Y"> </component>
+  <component name="Z"> </component>
+</project>
+XML
+  end
+
   def test_to_xml
     local_dir = self.random_local_dir
     project = Reality::Idea::Model::Project.new('acal', :project_directory => local_dir)

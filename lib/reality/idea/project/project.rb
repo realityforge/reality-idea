@@ -95,6 +95,20 @@ module Reality
           end
         end
 
+        def to_sorted_document(input_document)
+          # noinspection RubyArgCount
+          output_document = REXML::Document.new('<project version="4"/>', :attribute_quote => :quote)
+
+          # Ensure components are sorted in the same order as those in idea files
+          input_document.root.get_elements('//component').
+            sort {|s1, s2| s1.attribute('name').value <=> s2.attribute('name').value}.
+            each do |element|
+            output_document.root.add_element(element)
+          end
+
+          output_document
+        end
+
         def inject_component_unless_present(doc, component)
           unless REXML::XPath.first(doc, "//component[@name='#{component.attributes['name']}']")
             doc.root.add_element component
