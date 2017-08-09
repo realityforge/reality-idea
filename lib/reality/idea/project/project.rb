@@ -33,6 +33,14 @@ module Reality
           resolve_path_from_base(path, 'PROJECT_DIR')
         end
 
+        def template_files
+          @template_files.dup
+        end
+
+        def template_file(template_file)
+          @template_files << template_file
+        end
+
         def component_files
           @component_files.dup
         end
@@ -44,6 +52,7 @@ module Reality
         def to_xml
           document = build_base_document
           inject_component_files(document)
+          inject_template_files(document)
 
           format_document(to_sorted_document(document))
         end
@@ -68,11 +77,27 @@ module Reality
           end.document
         end
 
+        def inject_template_files(document)
+          self.template_files.each do |template_file|
+            Reality::Idea.error("Template file '#{template_file}' specified for project '#{self.name}' does not exist.") unless File.exist?(template_file)
+            template_doc = Reality::Idea::Util.new_document(IO.read(template_file)).root
+            REXML::XPath.each(template_doc, '//component') do |element|
+              inject_component_unless_present(document, element)
+            end
+          end
+        end
+
         def inject_component_files(document)
           self.component_files.each do |component_file|
             Reality::Idea.error("Component file '#{component_file}' specified for project '#{self.name}' does not exist.") unless File.exist?(component_file)
             component_file_doc = Reality::Idea::Util.new_document(IO.read(component_file)).root
             inject_component(document, component_file_doc.root)
+          end
+        end
+
+        def inject_component_unless_present(doc, component)
+          unless REXML::XPath.first(doc, "//component[@name='#{component.attributes['name']}']")
+            doc.root.add_element component
           end
         end
 
@@ -84,6 +109,7 @@ module Reality
         def pre_init
           idea_file_pre_init
           @project_directory = nil
+          @template_files = []
           @component_files = []
         end
 

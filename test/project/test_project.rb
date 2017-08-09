@@ -48,6 +48,94 @@ class Reality::Idea::TestProject < Reality::Idea::TestCase
     assert_equal '$PROJECT_DIR$/core/foo.txt', project.resolve_path("#{local_dir}/core/foo.txt")
   end
 
+  def test_template_files
+    local_dir = self.random_local_dir
+    project = Reality::Idea::Model::Project.new('acal', :project_directory => local_dir)
+
+    assert_equal 0, project.template_files.size
+
+    FileUtils.mkdir_p local_dir
+    IO.write("#{local_dir}/mytemplate.xml", <<XML)
+<project version="4">
+  <component name="X">
+  </component>
+</project>
+XML
+
+    project.template_file("#{local_dir}/mytemplate.xml")
+
+    assert_equal 1, project.template_files.size
+
+    assert_xml_equal <<XML, project.to_xml
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules> </modules>
+  </component>
+  <component name="X"> </component>
+</project>
+XML
+  end
+
+  def test_template_files_that_overwrites
+    local_dir = self.random_local_dir
+    project = Reality::Idea::Model::Project.new('acal', :project_directory => local_dir)
+
+    assert_equal 0, project.template_files.size
+
+    FileUtils.mkdir_p local_dir
+    IO.write("#{local_dir}/mytemplate1.xml", <<XML)
+<project version="4">
+  <component name="X">
+    <v1/>
+  </component>
+</project>
+XML
+    IO.write("#{local_dir}/mytemplate2.xml", <<XML)
+<project version="4">
+  <component name="Y">
+    <v1/>
+  </component>
+</project>
+XML
+    IO.write("#{local_dir}/mytemplate3.xml", <<XML)
+<project version="4">
+  <component name="X">
+    <v2/>
+  </component>
+</project>
+XML
+    IO.write("#{local_dir}/mytemplate4.xml", <<XML)
+<project version="4">
+  <component name="ProjectModuleManager">
+    <v3/>
+  </component>
+</project>
+XML
+
+
+    project.template_file("#{local_dir}/mytemplate1.xml")
+    project.template_file("#{local_dir}/mytemplate2.xml")
+    project.template_file("#{local_dir}/mytemplate3.xml")
+    project.template_file("#{local_dir}/mytemplate4.xml")
+
+    assert_equal 4, project.template_files.size
+
+    assert_xml_equal <<XML, project.to_xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules> </modules>
+  </component>
+  <component name="X">
+    <v1/>
+  </component>
+  <component name="Y">
+    <v1/>
+  </component>
+</project>
+XML
+  end
+
   def test_component_files
     local_dir = self.random_local_dir
     project = Reality::Idea::Model::Project.new('acal', :project_directory => local_dir)
