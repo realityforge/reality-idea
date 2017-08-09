@@ -47,4 +47,17 @@ class Reality::Idea::TestProject < Reality::Idea::TestCase
 
     assert_equal '$PROJECT_DIR$/core/foo.txt', project.resolve_path("#{local_dir}/core/foo.txt")
   end
+
+  def test_to_xml
+    local_dir = self.random_local_dir
+    project = Reality::Idea::Model::Project.new('acal', :project_directory => local_dir)
+
+    assert_xml_equal <<XML, project.to_xml
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules> </modules>
+  </component>
+</project>
+XML
+  end
 end
