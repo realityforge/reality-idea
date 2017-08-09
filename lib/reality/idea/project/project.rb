@@ -52,6 +52,7 @@ module Reality
         def to_xml
           document = build_base_document
           inject_component_files(document)
+          inject_template_file(document, self.filename) if File.exist?(self.filename)
           inject_template_files(document)
 
           format_document(to_sorted_document(document))
@@ -80,10 +81,14 @@ module Reality
         def inject_template_files(document)
           self.template_files.each do |template_file|
             Reality::Idea.error("Template file '#{template_file}' specified for project '#{self.name}' does not exist.") unless File.exist?(template_file)
-            template_doc = Reality::Idea::Util.new_document(IO.read(template_file))
-            REXML::XPath.each(template_doc, '//component') do |element|
-              inject_component_unless_present(document, element)
-            end
+            inject_template_file(document, template_file)
+          end
+        end
+
+        def inject_template_file(document, template_file)
+          template_doc = Reality::Idea::Util.new_document(IO.read(template_file))
+          REXML::XPath.each(template_doc, '//component') do |element|
+            inject_component_unless_present(document, element)
           end
         end
 

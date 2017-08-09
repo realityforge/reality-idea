@@ -48,6 +48,28 @@ class Reality::Idea::TestProject < Reality::Idea::TestCase
     assert_equal '$PROJECT_DIR$/core/foo.txt', project.resolve_path("#{local_dir}/core/foo.txt")
   end
 
+  def test_existing_file_merged_in
+    local_dir = self.random_local_dir
+    project = Reality::Idea::Model::Project.new('acal', :project_directory => local_dir)
+
+    FileUtils.mkdir_p local_dir
+    IO.write("#{local_dir}/acal.ipr", <<XML)
+<project version="4">
+  <component name="X">
+  </component>
+</project>
+XML
+
+    assert_xml_equal <<XML, project.to_xml
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules> </modules>
+  </component>
+  <component name="X"> </component>
+</project>
+XML
+  end
+
   def test_template_files
     local_dir = self.random_local_dir
     project = Reality::Idea::Model::Project.new('acal', :project_directory => local_dir)
