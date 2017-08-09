@@ -48,6 +48,76 @@ class Reality::Idea::TestProject < Reality::Idea::TestCase
     assert_equal '$PROJECT_DIR$/core/foo.txt', project.resolve_path("#{local_dir}/core/foo.txt")
   end
 
+  def test_component_files
+    local_dir = self.random_local_dir
+    project = Reality::Idea::Model::Project.new('acal', :project_directory => local_dir)
+
+    assert_equal 0, project.component_files.size
+
+    FileUtils.mkdir_p local_dir
+    IO.write("#{local_dir}/mycomponent.xml", <<XML)
+<component name="X">
+</component>
+XML
+
+    project.component_file("#{local_dir}/mycomponent.xml")
+
+    assert_equal 1, project.component_files.size
+
+    assert_xml_equal <<XML, project.to_xml
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules> </modules>
+  </component>
+  <component name="X"> </component>
+</project>
+XML
+  end
+
+  def test_component_files_that_overwrites
+    local_dir = self.random_local_dir
+    project = Reality::Idea::Model::Project.new('acal', :project_directory => local_dir)
+
+    assert_equal 0, project.component_files.size
+
+    FileUtils.mkdir_p local_dir
+    IO.write("#{local_dir}/mycomponent1.xml", <<XML)
+<component name="X">
+<v1/>
+</component>
+XML
+    IO.write("#{local_dir}/mycomponent2.xml", <<XML)
+<component name="Y">
+<v1/>
+</component>
+XML
+    IO.write("#{local_dir}/mycomponent3.xml", <<XML)
+<component name="X">
+<v2/>
+</component>
+XML
+
+    project.component_file("#{local_dir}/mycomponent1.xml")
+    project.component_file("#{local_dir}/mycomponent2.xml")
+    project.component_file("#{local_dir}/mycomponent3.xml")
+
+    assert_equal 3, project.component_files.size
+
+    assert_xml_equal <<XML, project.to_xml
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules> </modules>
+  </component>
+  <component name="X">
+    <v2/>
+  </component>
+  <component name="Y">
+    <v1/>
+  </component>
+</project>
+XML
+  end
+
   def test_to_xml
     local_dir = self.random_local_dir
     project = Reality::Idea::Model::Project.new('acal', :project_directory => local_dir)
