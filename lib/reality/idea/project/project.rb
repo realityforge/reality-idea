@@ -80,7 +80,7 @@ module Reality
         def inject_template_files(document)
           self.template_files.each do |template_file|
             Reality::Idea.error("Template file '#{template_file}' specified for project '#{self.name}' does not exist.") unless File.exist?(template_file)
-            template_doc = Reality::Idea::Util.new_document(IO.read(template_file)).root
+            template_doc = Reality::Idea::Util.new_document(IO.read(template_file))
             REXML::XPath.each(template_doc, '//component') do |element|
               inject_component_unless_present(document, element)
             end
@@ -90,7 +90,7 @@ module Reality
         def inject_component_files(document)
           self.component_files.each do |component_file|
             Reality::Idea.error("Component file '#{component_file}' specified for project '#{self.name}' does not exist.") unless File.exist?(component_file)
-            component_file_doc = Reality::Idea::Util.new_document(IO.read(component_file)).root
+            component_file_doc = Reality::Idea::Util.new_document(IO.read(component_file))
             inject_component(document, component_file_doc.root)
           end
         end
