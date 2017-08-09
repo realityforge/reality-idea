@@ -112,7 +112,6 @@ XML
 </project>
 XML
 
-
     project.template_file("#{local_dir}/mytemplate1.xml")
     project.template_file("#{local_dir}/mytemplate2.xml")
     project.template_file("#{local_dir}/mytemplate3.xml")
