@@ -53,7 +53,7 @@ class Reality::Idea::TestCase < Minitest::Test
   def teardown_working_dir
     Dir.chdir(@cwd)
     if passed?
-      FileUtils.rm_rf self.working_dir if File.exist?(self.working_dir)
+      FileUtils.rm_rf self.working_dir
     else
       $stderr.puts "Test #{self.class.name}.#{name} Failed. Leaving working directory #{self.working_dir}"
     end
