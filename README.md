@@ -36,3 +36,15 @@ An ruby model to represent and generate intellij idea project files.
     <property name="settings.editor.selected.configurable" value="Settings.Markdown.Preview" />
   </component>
 ```
+* Configure node modules directory.
+```xml
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/auth/client/node_modules" />
+  </component>
+```
+* Typescript configuration?
+```xml
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+```
