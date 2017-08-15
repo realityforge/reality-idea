@@ -17,14 +17,12 @@ module Reality
     module Model
 
       class RemoteRepository
-        def initialize(component, id, name, url)
-          @component = component
+        def initialize(id, name, url)
           @id = id
           @name = name
           @url = url
         end
 
-        attr_reader :component
         attr_reader :id
         attr_reader :name
         attr_reader :url
@@ -46,7 +44,7 @@ module Reality
         attr_accessor :repositories
 
         def add(id, name, url)
-          @repositories << RemoteRepository.new(self, id, name, url)
+          @repositories << RemoteRepository.new(id, name, url)
         end
 
         def add_central
