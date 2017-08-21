@@ -141,12 +141,12 @@ XML
   def test_build_xml_multiple_datasources
     project = create_project
 
-    project.datasources.sql_server_datasource('MYDB')
-    project.datasources.postgres_datasource('OtherDB')
+    sql_server = project.datasources.sql_server_datasource('MYDB')
+    postgres = project.datasources.postgres_datasource('OtherDB')
 
     assert_xml_equal <<XML, component_to_xml(project.datasources)
 <component format="xml" hash="3208837817" name="DataSourceManagerImpl">
-  <data-source name="MYDB" source="LOCAL" uuid="9a436e1f-fe30-4068-b16b-e935b29a7193">
+  <data-source name="MYDB" source="LOCAL" uuid="#{sql_server.uuid}">
     <synchronize>true</synchronize>
     <jdbc-driver>net.sourceforge.jtds.jdbc.Driver</jdbc-driver>
     <default-dialect>TSQL</default-dialect>
@@ -156,7 +156,7 @@ XML
       </library>
     </libraries>
   </data-source>
-  <data-source name="OtherDB" source="LOCAL" uuid="a7c3455b-e8b9-4396-bcb2-5ba65075dfd4">
+  <data-source name="OtherDB" source="LOCAL" uuid="#{postgres.uuid}">
     <synchronize>true</synchronize>
     <jdbc-driver>org.postgresql.Driver</jdbc-driver>
     <default-dialect>PostgreSQL</default-dialect>

@@ -30,12 +30,14 @@ module Reality
           @dialect = nil
           @synchronize = true
           @classpath = []
+          @uuid = SecureRandom.uuid
 
           super(options, &block)
         end
 
         attr_reader :component
         attr_reader :name
+        attr_reader :uuid
         attr_accessor :driver
         attr_accessor :url
         attr_accessor :username
@@ -53,7 +55,7 @@ module Reality
         end
 
         def build_xml(xml)
-          xml.tag!('data-source', :source => 'LOCAL', :name => self.name, :uuid => SecureRandom.uuid) do
+          xml.tag!('data-source', :source => 'LOCAL', :name => self.name, :uuid => self.uuid) do
             xml.tag!('synchronize', self.synchronize?)
             xml.tag!('jdbc-driver', self.driver) if self.driver
             xml.tag!('jdbc-url', self.url) if self.url
@@ -87,7 +89,9 @@ module Reality
         attr_accessor :datasources
 
         def datasource(name, options = {}, &block)
-          @datasources << Datasource.new(self, name, options, &block)
+          datasource = Datasource.new(self, name, options, &block)
+          @datasources << datasource
+          datasource
         end
 
         def postgres_datasource(name, options = {})
