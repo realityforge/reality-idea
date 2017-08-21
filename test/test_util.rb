@@ -40,4 +40,13 @@ XML
     assert_equal 'foo', Reality::Idea::Util.relative_path("#{dir}/../#{File.basename(dir)}/foo", dir)
     assert_equal '', Reality::Idea::Util.relative_path(dir, dir)
   end
+
+  def test_artifact_to_file
+    dir = self.working_dir
+    maven_dir = self.maven_dir
+    assert_equal "#{dir}/file.txt", Reality::Idea::Util.artifact_to_file("#{dir}/file.txt")
+    assert_equal "#{maven_dir}/com/biz/myartifact/2.1/myartifact-2.1.jar", Reality::Idea::Util.artifact_to_file('com.biz:myartifact:2.1')
+    assert_equal "#{maven_dir}/com/biz/myartifact/2.1/myartifact-2.1.jar", Reality::Idea::Util.artifact_to_file('com.biz:myartifact:jar:2.1')
+    assert_equal "#{maven_dir}/com/biz/myartifact/2.1/myartifact-2.1-sources.jar", Reality::Idea::Util.artifact_to_file('com.biz:myartifact:jar:sources:2.1')
+  end
 end

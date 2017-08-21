@@ -75,6 +75,10 @@ class Reality::Idea::TestCase < Minitest::Test
     @workspace_dir ||= File.expand_path(ENV['TEST_TMP_DIR'] || "#{File.dirname(__FILE__)}/../tmp/workspace")
   end
 
+  def maven_dir
+    File.expand_path('~/.m2/repository')
+  end
+
   def assert_idea_error(expected_message, &block)
     assert_logging_error(Reality::Idea, expected_message) do
       yield block
