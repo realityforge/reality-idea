@@ -6,7 +6,6 @@ An ruby model to represent and generate intellij idea project files.
 
 ## TODO
 
-* Add `datasources` project component.
 * Add CLI action that generates files from model.
 * Add "integration" tests that given a model generates the files.
 * Add hook to facets so they can determine if they generate.
